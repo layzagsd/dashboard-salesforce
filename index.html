@@ -1,8 +1,10 @@
-<html lang="pt-BR" data-theme="light"><head>
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Salesforce – Indicador de Consumo 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Sora:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -53,10 +55,7 @@ h1 span{color:var(--accent);}
 .viz-btn.active{background:var(--accent);color:#fff;}
 .viz-btn:not(.active):hover{color:var(--text);}
 
-/* UPDATE BUTTON */
-.update-btn{display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:opacity .2s;white-space:nowrap;}
-.update-btn:hover{opacity:.85;}
-.update-btn svg{width:14px;height:14px;}
+
 
 /* NAV */
 nav{display:flex;gap:2px;padding:12px 32px 0;background:var(--nav-bg);border-bottom:1px solid var(--border);overflow-x:auto;}
@@ -131,17 +130,6 @@ tbody td:first-child{text-align:left;font-family:'Sora',sans-serif;font-weight:5
 .total-row td{color:var(--text)!important;border-top:1px solid var(--border);}
 .acc{color:var(--accent)!important;}
 
-/* ===== MODAL ===== */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
-.modal-overlay.open{display:flex;}
-.modal{background:var(--modal-bg);border:1px solid var(--border);border-radius:16px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.4);}
-.modal-head{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.modal-head h2{font-size:15px;font-weight:700;color:var(--text);}
-.modal-head p{font-size:11px;color:var(--muted);margin-top:3px;}
-.modal-close{background:none;border:1px solid var(--border);border-radius:8px;width:30px;height:30px;cursor:pointer;color:var(--muted);font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
-.modal-close:hover{border-color:var(--red);color:var(--red);}
-.modal-body{padding:20px 24px;}
-
 /* FORM GROUPS */
 .form-month{display:flex;gap:10px;margin-bottom:20px;align-items:flex-end;}
 .form-group{flex:1;}
@@ -189,66 +177,7 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- MODAL DE ATUALIZAÇÃO -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <div class="modal-head">
-      <div>
-        <h2>Adicionar mês de consumo</h2>
-        <p>Preencha os valores do relatório Salesforce do mês</p>
-      </div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-month">
-        <div class="form-group" style="flex:0 0 140px;">
-          <label>Mês de referência</label>
-          <select id="fMes">
-            <option value="Jan/26">Jan/26</option><option value="Fev/26">Fev/26</option>
-            <option value="Mar/26">Mar/26</option><option value="Abr/26" selected="">Abr/26</option>
-            <option value="Mai/26">Mai/26</option><option value="Jun/26">Jun/26</option>
-            <option value="Jul/26">Jul/26</option><option value="Ago/26">Ago/26</option>
-            <option value="Set/26">Set/26</option><option value="Out/26">Out/26</option>
-            <option value="Nov/26">Nov/26</option><option value="Dez/26">Dez/26</option>
-            <option value="Jan/27">Jan/27</option><option value="Fev/27">Fev/27</option>
-            <option value="Mar/27">Mar/27</option><option value="Abr/27">Abr/27</option>
-            <option value="Mai/27">Mai/27</option><option value="Jun/27">Jun/27</option>
-            <option value="Jul/27">Jul/27</option><option value="Ago/27">Ago/27</option>
-            <option value="Set/27">Set/27</option>
-          </select>
-        </div>
-      </div>
 
-      <div class="form-section-label">Super Messages</div>
-      <div class="form-row">
-        <div class="form-group"><label>Redação</label><input id="fRedacao" type="number" placeholder="ex: 26000000"></div>
-        <div class="form-group"><label>Circulação</label><input id="fCirculacao" type="number" placeholder="ex: 31000000"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Marketing</label><input id="fMarketing" type="number" placeholder="ex: 900000"></div>
-      </div>
-
-      <div class="form-section-label">SMS / MMS — Call Center</div>
-      <div class="form-row">
-        <div class="form-group"><label>Disparos SMS/MMS</label><input id="fSMS" type="number" placeholder="ex: 150000"></div>
-      </div>
-
-      <div class="form-section-label">WhatsApp — Marketing</div>
-      <div class="form-row">
-        <div class="form-group"><label>Disparos WhatsApp</label><input id="fWA" type="number" placeholder="ex: 200000"></div>
-      </div>
-
-      <div class="history-section">
-        <div class="history-title">Meses já adicionados (além dos dados base)</div>
-        <div class="history-list" id="historyList"><div style="font-size:11px;color:var(--muted);padding:6px 0;">Nenhum mês adicionado ainda.</div></div>
-      </div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
-      <button class="btn-save" onclick="saveMonth()">Adicionar mês</button>
-    </div>
-  </div>
-</div>
 
 <header>
   <div class="header-left">
@@ -267,10 +196,6 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
   </div>
   <div class="controls">
     
-    <button class="update-btn" onclick="exportarIndex()" style="background:var(--green);">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v8M5 7l3 3 3-3M3 13h10"></path></svg>
-      Exportar index.html
-    </button>
     <div class="viz-toggle">
       <button class="viz-btn active" onclick="setViz('charts',this)">Gráficos</button>
       <button class="viz-btn" onclick="setViz('table',this)">Tabela</button>
@@ -284,47 +209,25 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
 </header>
 
 <nav>
-  <button class="tab" onclick="showTab('resumo',this)">Resumo Geral</button>
-  <button class="tab active" onclick="showTab('super',this)">Super Messages</button>
+  <button class="tab active" onclick="showTab('resumo',this)">Resumo Geral</button>
+  <button class="tab" onclick="showTab('super',this)">Super Messages</button>
   <button class="tab" onclick="showTab('sms',this)">SMS / MMS</button>
   <button class="tab" onclick="showTab('whatsapp',this)">WhatsApp</button>
   <button class="tab" onclick="showTab('detalhe',this)">Tabela Mensal</button>
-  
 </nav>
 
 <main id="mainArea" class="view-charts">
 
 <!-- RESUMO -->
-<section id="resumo" class="section">
+<section id="resumo" class="section active">
   <div class="section-title">Acumulado por Canal</div>
-  <div class="kpi-grid" id="kpiResumoAcum">
-    <div class="kpi"><div class="kpi-label">Super Messages · Acumulado</div><div class="kpi-value">399.9M</div><div class="kpi-sub">Franquia 24m: 1.410.040.000</div><span class="kpi-badge badge-green">28.4% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">SMS/MMS · Acumulado</div><div class="kpi-value">946.686</div><div class="kpi-sub">Franquia 24m: 10.650.000</div><span class="kpi-badge badge-green">8.9% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">WhatsApp · Acumulado</div><div class="kpi-value">924.344</div><div class="kpi-sub">Franquia 24m: 7.720.000</div><span class="kpi-badge badge-green">12.0% utilizado</span></div></div>
+  <div class="kpi-grid" id="kpiResumoAcum"></div>
   <div class="section-title">Média Mensal por Canal</div>
-  <div class="kpi-grid" id="kpiResumoMedia">
-    <div class="kpi"><div class="kpi-label">Média Mensal · Super Messages</div><div class="kpi-value">64.2M</div><div class="kpi-sub">Franquia mensal: 57.083.333 · Média dos últimos 6 meses</div><span class="kpi-badge badge-red">Acima da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · SMS/MMS</div><div class="kpi-value">138.711</div><div class="kpi-sub">Franquia mensal: 443.750 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · WhatsApp</div><div class="kpi-value">154.006</div><div class="kpi-sub">Franquia mensal: 321.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div></div>
+  <div class="kpi-grid" id="kpiResumoMedia"></div>
 
   <div class="charts-only">
     <div class="section-title">Utilização da Franquia Total (24 meses)</div>
-    <div class="prog-section" id="progSection">
-    <div class="prog-item">
-      <div class="prog-header"><div class="prog-title">Super Messages</div><div class="prog-stats">399.909.996 / 1.410.040.000&nbsp;|&nbsp;<span style="color:var(--green)">28.4%</span></div></div>
-      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:28.4%"></div></div>
-      <div class="prog-labels"><span>0</span><span>28.4%</span><span>100%</span></div>
-    </div>
-    <div class="prog-item">
-      <div class="prog-header"><div class="prog-title">SMS / MMS</div><div class="prog-stats">946.686 / 10.650.000&nbsp;|&nbsp;<span style="color:var(--green)">8.9%</span></div></div>
-      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:8.9%"></div></div>
-      <div class="prog-labels"><span>0</span><span>8.9%</span><span>100%</span></div>
-    </div>
-    <div class="prog-item">
-      <div class="prog-header"><div class="prog-title">WhatsApp</div><div class="prog-stats">924.344 / 7.720.000&nbsp;|&nbsp;<span style="color:var(--green)">12.0%</span></div></div>
-      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:12%"></div></div>
-      <div class="prog-labels"><span>0</span><span>12.0%</span><span>100%</span></div>
-    </div></div>
+    <div class="prog-section" id="progSection"></div>
   </div>
 
   <div class="section-title">Condições do Contrato</div>
@@ -339,18 +242,11 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
 </section>
 
 <!-- SUPER MESSAGES -->
-<section id="super" class="section active">
+<section id="super" class="section">
   <div class="section-title">Acumulado por Grupo</div>
-  <div class="kpi-grid" id="kpiSuperAcum">
-    <div class="kpi"><div class="kpi-label">Redação · Acumulado</div><div class="kpi-value">171.8M</div><div class="kpi-sub">Franquia 24m: 674.040.000 · Part.: 42.9%</div><span class="kpi-badge badge-green">25.5% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Circulação · Acumulado</div><div class="kpi-value">222.7M</div><div class="kpi-sub">Franquia 24m: 714.000.000 · Part.: 55.7%</div><span class="kpi-badge badge-green">31.2% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Marketing · Acumulado</div><div class="kpi-value">5.4M</div><div class="kpi-sub">Franquia 24m: 22.000.000 · Part.: 1.4%</div><span class="kpi-badge badge-green">24.7% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Total Acumulado SM</div><div class="kpi-value">399.9M</div><div class="kpi-sub">Franquia 24m: 1.410.040.000</div><span class="kpi-badge badge-green">28.4% utilizado</span></div></div>
+  <div class="kpi-grid" id="kpiSuperAcum"></div>
   <div class="section-title">Média Mensal por Grupo</div>
-  <div class="kpi-grid" id="kpiSuperMedia">
-    <div class="kpi"><div class="kpi-label">Média Mensal · Redação</div><div class="kpi-value">27.4M</div><div class="kpi-sub">Franquia mensal: 28.085.000 · Média dos últimos 6 meses</div><span class="kpi-badge badge-amber">Próximo da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · Circulação</div><div class="kpi-value">35.9M</div><div class="kpi-sub">Franquia mensal: 29.750.000 · Média dos últimos 6 meses</div><span class="kpi-badge badge-red">Acima da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · Marketing</div><div class="kpi-value">868K</div><div class="kpi-sub">Franquia mensal: 916.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div></div>
+  <div class="kpi-grid" id="kpiSuperMedia"></div>
   <div class="section-title">Projeção até o Final do Contrato</div>
   <div id="alertaProjecao" style="margin-bottom:16px;"></div>
   <div class="charts-only">
@@ -368,147 +264,40 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
             <button class="proj-filtro" onclick="setFiltroProjecao('marketing',this)">Marketing</button>
           </div>
         </div>
-        <div id="alertaProjecaoFiltro" style="margin-bottom:12px;">
-      <div style="background:rgba(239,68,68,0.08);border:1px solid var(--red);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
-        <div style="font-size:18px;flex-shrink:0;">⚠️</div>
-        <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-          <strong style="color:var(--red)">Total SM:</strong> mantendo a média de <strong style="color:var(--text)">64.2M/mês</strong>, 
-          a franquia de <strong style="color:var(--text)">1,41 Bi</strong> será esgotada em 
-          <strong style="color:var(--red)">Jul/27</strong> — 
-          <strong style="color:var(--red)">2 meses</strong> antes do fim do contrato.
-        </div>
-      </div></div>
-        <div class="chart-wrap" style="height:300px;"><canvas id="chartProjecao" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 1415px;" width="1769"></canvas></div>
+        <div id="alertaProjecaoFiltro" style="margin-bottom:12px;"></div>
+        <div class="chart-wrap" style="height:300px;"><canvas id="chartProjecao"></canvas></div>
       </div>
-      <div class="chart-card wide"><div class="chart-title">Consumo Mensal por Grupo</div><div class="chart-sub">Disparos mensais (Redação, Circulação, Marketing) vs franquia mensal</div><div class="chart-wrap"><canvas id="chartSuper" height="300" style="display: block; box-sizing: border-box; height: 240px; width: 1415px;" width="1769"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Participação por Grupo (Acumulado)</div><div class="chart-sub">Distribuição do consumo total</div><div class="chart-wrap"><canvas id="chartSuperPie" height="300" style="display: block; box-sizing: border-box; height: 240px; width: 678px;" width="848"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Acumulado vs Franquia 24 meses</div><div class="chart-sub">Evolução do total acumulado de Super Messages</div><div class="chart-wrap"><canvas id="chartSuperAcum" height="300" style="display: block; box-sizing: border-box; height: 240px; width: 678px;" width="848"></canvas></div></div>
+      <div class="chart-card wide"><div class="chart-title">Consumo Mensal por Grupo</div><div class="chart-sub">Disparos mensais (Redação, Circulação, Marketing) vs franquia mensal</div><div class="chart-wrap"><canvas id="chartSuper"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Participação por Grupo (Acumulado)</div><div class="chart-sub">Distribuição do consumo total</div><div class="chart-wrap"><canvas id="chartSuperPie"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Acumulado vs Franquia 24 meses</div><div class="chart-sub">Evolução do total acumulado de Super Messages</div><div class="chart-wrap"><canvas id="chartSuperAcum"></canvas></div></div>
     </div>
   </div>
   <div class="table-only" style="margin-top:18px;">
-    <div class="table-wrap"><div class="table-header"><h3>Super Messages — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Redação</th><th>Circulação</th><th>Marketing</th><th>Total Mensal</th><th>Acumulado</th></tr></thead><tbody id="tabelaSuper"><tr>
-      <td>Set/25</td>
-      <td style="">7.170.435</td>
-      <td style="">7.595.529</td>
-      <td style="">234.036</td>
-      <td style="">15.000.000</td>
-      <td>15.000.000</td>
-    </tr><tr>
-      <td>Out/25</td>
-      <td style="color:var(--red);">29.629.000 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="color:var(--red);">31.385.534 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="color:var(--red);">967.061 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="color:var(--red);">61.981.595 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td>76.981.595</td>
-    </tr><tr>
-      <td>Nov/25</td>
-      <td style="">26.465.872</td>
-      <td style="">28.034.883</td>
-      <td style="">863.820</td>
-      <td style="">55.364.575</td>
-      <td>132.346.170</td>
-    </tr><tr>
-      <td>Dez/25</td>
-      <td style="color:var(--red);">31.443.336 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="color:var(--red);">33.307.433 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="color:var(--red);">1.026.279 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="color:var(--red);">65.777.048 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td>198.123.218</td>
-    </tr><tr>
-      <td>Jan/26</td>
-      <td style="">27.261.021</td>
-      <td style="color:var(--red);">48.488.661 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="color:var(--red);">1.863.375 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="color:var(--red);">77.613.057 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td>275.736.275</td>
-    </tr><tr>
-      <td>Fev/26</td>
-      <td style="">22.541.863</td>
-      <td style="color:var(--red);">32.614.831 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="">430.508</td>
-      <td style="">55.587.202</td>
-      <td>331.323.477</td>
-    </tr><tr>
-      <td>Mar/26</td>
-      <td style="">27.246.495</td>
-      <td style="color:var(--red);">41.282.552 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="">57.472</td>
-      <td style="color:var(--red);">68.586.519 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td>399.909.996</td>
-    </tr><tr class="total-row"><td>ACUMULADO</td><td>171.758.022</td><td>222.709.423</td><td>5.442.551</td><td>399.909.996</td><td class="acc">399.909.996</td></tr></tbody></table></div></div>
+    <div class="table-wrap"><div class="table-header"><h3>Super Messages — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Redação</th><th>Circulação</th><th>Marketing</th><th>Total Mensal</th><th>Acumulado</th></tr></thead><tbody id="tabelaSuper"></tbody></table></div></div>
   </div>
 </section>
 
 <!-- SMS -->
 <section id="sms" class="section">
   <div class="section-title">SMS / MMS — Call Center</div>
-  <div class="kpi-grid" id="kpiSMS">
-    <div class="kpi"><div class="kpi-label">Acumulado</div><div class="kpi-value">946.686</div><div class="kpi-sub">Franquia 24m: 10.650.000</div><span class="kpi-badge badge-green">8.9% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">138.711</div><div class="kpi-sub">Franquia mensal: 443.750 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Valor pago</div><div class="kpi-value">R$ 5,38</div><div class="kpi-sub">Por pacote de 1.000</div></div>
-    <div class="kpi"><div class="kpi-label">Saldo restante</div><div class="kpi-value">9.703.314</div><div class="kpi-sub">Franquia total: 10.650.000</div><span class="kpi-badge badge-green">91.1% disponível</span></div></div>
-
-  <div class="section-title">Projeção até o Final do Contrato</div>
+  <div class="kpi-grid" id="kpiSMS"></div>
   <div class="charts-only">
-    <div class="chart-grid">
-      <div class="chart-card wide" style="height:auto;">
-        <div class="chart-title">Projeção de Consumo Acumulado — Set/2025 a Set/2027</div>
-        <div class="chart-sub">Acumulado real + projeção pela média atual vs franquia total do contrato</div>
-        <div id="alertaProjecaoSMSFiltro" style="margin-bottom:12px;">
-        <div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
-          <div style="font-size:18px;flex-shrink:0;">✅</div>
-          <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-            <strong style="color:var(--green)">SMS/MMS:</strong> mantendo a média de <strong style="color:var(--text)">138.711/mês</strong>, 
-            a franquia de <strong style="color:var(--text)">10,7 M</strong> será suficiente até Set/2027 com sobra estimada de 
-            <strong style="color:var(--green)">7.206.519</strong> disparos.
-          </div>
-        </div></div>
-        <div class="chart-wrap" style="height:300px;"><canvas id="chartProjecaoSMS" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
-      </div>
-      <div class="chart-card wide"><div class="chart-title">Consumo Mensal — SMS/MMS Call Center</div><div class="chart-sub">Disparos mensais vs franquia mensal (443.750)</div><div class="chart-wrap"><canvas id="chartSMS" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div></div>
-    </div>
+    <div class="chart-grid"><div class="chart-card wide"><div class="chart-title">Consumo Mensal — SMS/MMS Call Center</div><div class="chart-sub">Disparos mensais vs franquia mensal (443.750)</div><div class="chart-wrap"><canvas id="chartSMS"></canvas></div></div></div>
   </div>
   <div class="table-only" style="margin-top:18px;">
-    <div class="table-wrap"><div class="table-header"><h3>SMS/MMS — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Disparos</th><th>Acumulado</th><th>Franquia Mensal</th><th>% Franquia</th></tr></thead><tbody id="tabelaSMS"><tr><td>Set/25</td><td>114.421</td><td>114.421</td><td>443.750</td><td>25.8%</td></tr><tr><td>Out/25</td><td>204.175</td><td>318.596</td><td>443.750</td><td>46.0%</td></tr><tr><td>Nov/25</td><td>203.187</td><td>521.783</td><td>443.750</td><td>45.8%</td></tr><tr><td>Dez/25</td><td>191.268</td><td>713.051</td><td>443.750</td><td>43.1%</td></tr><tr><td>Jan/26</td><td>137.534</td><td>850.585</td><td>443.750</td><td>31.0%</td></tr><tr><td>Fev/26</td><td>47.675</td><td>898.260</td><td>443.750</td><td>10.7%</td></tr><tr><td>Mar/26</td><td>48.426</td><td>946.686</td><td>443.750</td><td>10.9%</td></tr><tr class="total-row"><td>ACUMULADO</td><td>946.686</td><td class="acc">946.686</td><td>—</td><td>8.9% do total</td></tr></tbody></table></div></div>
+    <div class="table-wrap"><div class="table-header"><h3>SMS/MMS — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Disparos</th><th>Acumulado</th><th>Franquia Mensal</th><th>% Franquia</th></tr></thead><tbody id="tabelaSMS"></tbody></table></div></div>
   </div>
 </section>
 
 <!-- WHATSAPP -->
 <section id="whatsapp" class="section">
   <div class="section-title">WhatsApp — Marketing</div>
-  <div class="kpi-grid" id="kpiWA">
-    <div class="kpi"><div class="kpi-label">Acumulado</div><div class="kpi-value">924.344</div><div class="kpi-sub">Franquia 24m: 7.720.000</div><span class="kpi-badge badge-green">12.0% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">154.006</div><div class="kpi-sub">Franquia mensal: 321.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Valor pago</div><div class="kpi-value">R$ 5,38</div><div class="kpi-sub">Por pacote de 1.000</div></div>
-    <div class="kpi"><div class="kpi-label">Saldo restante</div><div class="kpi-value">6.795.656</div><div class="kpi-sub">Franquia total: 7.720.000</div><span class="kpi-badge badge-green">88.0% disponível</span></div></div>
-
-  <div class="section-title">Projeção até o Final do Contrato</div>
-  <div id="alertaProjecaoWA" style="margin-bottom:16px;"></div>
+  <div class="kpi-grid" id="kpiWA"></div>
   <div class="charts-only">
-    <div class="chart-grid">
-      <div class="chart-card wide" style="height:auto;">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:4px;">
-          <div>
-            <div class="chart-title">Projeção de Consumo Acumulado — Set/2025 a Set/2027</div>
-            <div class="chart-sub">Acumulado real + projeção pela média atual vs franquia total do contrato</div>
-          </div>
-        </div>
-        <div id="alertaProjecaoWAFiltro" style="margin-bottom:12px;">
-        <div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
-          <div style="font-size:18px;flex-shrink:0;">✅</div>
-          <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-            <strong style="color:var(--green)">WhatsApp:</strong> mantendo a média de <strong style="color:var(--text)">154K/mês</strong>, 
-            a franquia de <strong style="color:var(--text)">7,7 M</strong> será suficiente até Set/2027 com sobra estimada de 
-            <strong style="color:var(--green)">4.0M</strong> disparos.
-          </div>
-        </div></div>
-        <div class="chart-wrap" style="height:300px;"><canvas id="chartProjecaoWA" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
-      </div>
-      <div class="chart-card wide"><div class="chart-title">Consumo Mensal — WhatsApp Marketing</div><div class="chart-sub">Disparos mensais vs franquia mensal (321.667)</div><div class="chart-wrap"><canvas id="chartWA" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div></div>
-    </div>
+    <div class="chart-grid"><div class="chart-card wide"><div class="chart-title">Consumo Mensal — WhatsApp Marketing</div><div class="chart-sub">Disparos mensais vs franquia mensal (321.667)</div><div class="chart-wrap"><canvas id="chartWA"></canvas></div></div></div>
   </div>
   <div class="table-only" style="margin-top:18px;">
-    <div class="table-wrap"><div class="table-header"><h3>WhatsApp — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Disparos</th><th>Acumulado</th><th>Franquia Mensal</th><th>% Franquia</th></tr></thead><tbody id="tabelaWA"><tr><td>Set/25</td><td>309</td><td>309</td><td>321.667</td><td>0.1%</td></tr><tr><td>Out/25</td><td>163.678</td><td>163.987</td><td>321.667</td><td>50.9%</td></tr><tr><td>Nov/25</td><td>57.955</td><td>221.942</td><td>321.667</td><td>18.0%</td></tr><tr><td>Dez/25</td><td>290.777</td><td>512.719</td><td>321.667</td><td>90.4%</td></tr><tr><td>Jan/26</td><td>135.742</td><td>648.461</td><td>321.667</td><td>42.2%</td></tr><tr><td>Fev/26</td><td>243.240</td><td>891.701</td><td>321.667</td><td>75.6%</td></tr><tr><td>Mar/26</td><td>32.643</td><td>924.344</td><td>321.667</td><td>10.1%</td></tr><tr class="total-row"><td>ACUMULADO</td><td>924.344</td><td class="acc">924.344</td><td>—</td><td>12.0% do total</td></tr></tbody></table></div></div>
+    <div class="table-wrap"><div class="table-header"><h3>WhatsApp — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Disparos</th><th>Acumulado</th><th>Franquia Mensal</th><th>% Franquia</th></tr></thead><tbody id="tabelaWA"></tbody></table></div></div>
   </div>
 </section>
 
@@ -518,116 +307,8 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
   <div class="table-wrap">
     <div class="table-header"><h3>Detalhe de Consumo Mensal</h3></div>
     <div style="overflow-x:auto">
-      <table id="tabelaCompletaEl">
-        <thead>
-          <tr>
-            <th rowspan="2" style="text-align:left;vertical-align:middle;border-right:2px solid var(--border);">Mês</th>
-            <th colspan="5" style="text-align:center;background:rgba(2,132,199,0.08);color:var(--accent);border-left:2px solid var(--accent);border-right:2px solid var(--accent);letter-spacing:.8px;">Super Messages</th>
-            <th colspan="2" style="text-align:center;background:rgba(124,58,237,0.08);color:#7c3aed;border-right:2px solid #7c3aed;letter-spacing:.8px;">SMS / MMS</th>
-            <th colspan="2" style="text-align:center;background:rgba(22,163,74,0.08);color:var(--green);letter-spacing:.8px;">WhatsApp</th>
-          </tr>
-          <tr>
-            <th style="background:rgba(2,132,199,0.05);border-left:2px solid var(--accent);">Redação</th>
-            <th style="background:rgba(2,132,199,0.05);">Circulação</th>
-            <th style="background:rgba(2,132,199,0.05);">Marketing</th>
-            <th style="background:rgba(2,132,199,0.05);">Total</th>
-            <th style="background:rgba(2,132,199,0.05);border-right:2px solid var(--accent);">Acumulado</th>
-            <th style="background:rgba(124,58,237,0.05);">Disparos</th>
-            <th style="background:rgba(124,58,237,0.05);border-right:2px solid #7c3aed;">Acumulado</th>
-            <th style="background:rgba(22,163,74,0.05);">Disparos</th>
-            <th style="background:rgba(22,163,74,0.05);">Acumulado</th>
-          </tr>
-        </thead>
-        <tbody id="tabelaCompleta"><tr>
-      <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">Set/25</td>
-      <td style="border-left:2px solid var(--accent);">7.170.435</td>
-      <td>7.595.529</td>
-      <td>234.036</td>
-      <td>15.000.000</td>
-      <td style="border-right:2px solid var(--accent);color:var(--accent);">15.000.000</td>
-      <td>114.421</td>
-      <td style="border-right:2px solid #7c3aed;color:#7c3aed;">114.421</td>
-      <td>309</td>
-      <td style="color:var(--green);">309</td>
-    </tr><tr>
-      <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">Out/25</td>
-      <td style="border-left:2px solid var(--accent);">29.629.000</td>
-      <td>31.385.534</td>
-      <td>967.061</td>
-      <td>61.981.595</td>
-      <td style="border-right:2px solid var(--accent);color:var(--accent);">76.981.595</td>
-      <td>204.175</td>
-      <td style="border-right:2px solid #7c3aed;color:#7c3aed;">318.596</td>
-      <td>163.678</td>
-      <td style="color:var(--green);">163.987</td>
-    </tr><tr>
-      <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">Nov/25</td>
-      <td style="border-left:2px solid var(--accent);">26.465.872</td>
-      <td>28.034.883</td>
-      <td>863.820</td>
-      <td>55.364.575</td>
-      <td style="border-right:2px solid var(--accent);color:var(--accent);">132.346.170</td>
-      <td>203.187</td>
-      <td style="border-right:2px solid #7c3aed;color:#7c3aed;">521.783</td>
-      <td>57.955</td>
-      <td style="color:var(--green);">221.942</td>
-    </tr><tr>
-      <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">Dez/25</td>
-      <td style="border-left:2px solid var(--accent);">31.443.336</td>
-      <td>33.307.433</td>
-      <td>1.026.279</td>
-      <td>65.777.048</td>
-      <td style="border-right:2px solid var(--accent);color:var(--accent);">198.123.218</td>
-      <td>191.268</td>
-      <td style="border-right:2px solid #7c3aed;color:#7c3aed;">713.051</td>
-      <td>290.777</td>
-      <td style="color:var(--green);">512.719</td>
-    </tr><tr>
-      <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">Jan/26</td>
-      <td style="border-left:2px solid var(--accent);">27.261.021</td>
-      <td>48.488.661</td>
-      <td>1.863.375</td>
-      <td>77.613.057</td>
-      <td style="border-right:2px solid var(--accent);color:var(--accent);">275.736.275</td>
-      <td>137.534</td>
-      <td style="border-right:2px solid #7c3aed;color:#7c3aed;">850.585</td>
-      <td>135.742</td>
-      <td style="color:var(--green);">648.461</td>
-    </tr><tr>
-      <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">Fev/26</td>
-      <td style="border-left:2px solid var(--accent);">22.541.863</td>
-      <td>32.614.831</td>
-      <td>430.508</td>
-      <td>55.587.202</td>
-      <td style="border-right:2px solid var(--accent);color:var(--accent);">331.323.477</td>
-      <td>47.675</td>
-      <td style="border-right:2px solid #7c3aed;color:#7c3aed;">898.260</td>
-      <td>243.240</td>
-      <td style="color:var(--green);">891.701</td>
-    </tr><tr>
-      <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">Mar/26</td>
-      <td style="border-left:2px solid var(--accent);">27.246.495</td>
-      <td>41.282.552</td>
-      <td>57.472</td>
-      <td>68.586.519</td>
-      <td style="border-right:2px solid var(--accent);color:var(--accent);">399.909.996</td>
-      <td>48.426</td>
-      <td style="border-right:2px solid #7c3aed;color:#7c3aed;">946.686</td>
-      <td>32.643</td>
-      <td style="color:var(--green);">924.344</td>
-    </tr><tr class="total-row">
-    <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">ACUMULADO</td>
-    <td style="border-left:2px solid var(--accent);">171.758.022</td>
-    <td>222.709.423</td>
-    <td>5.442.551</td>
-    <td>399.909.996</td>
-    <td style="border-right:2px solid var(--accent);color:var(--accent);">399.909.996</td>
-    <td>946.686</td>
-    <td style="border-right:2px solid #7c3aed;color:#7c3aed;">946.686</td>
-    <td>924.344</td>
-    <td style="color:var(--green);">924.344</td>
-  </tr></tbody>
-      </table>
+      <table><thead><tr><th>Mês</th><th>Redação</th><th>Circulação</th><th>Marketing</th><th>Total SM</th><th>Acum SM</th><th>SMS/MMS</th><th>SMS Acum</th><th>WhatsApp</th><th>WA Acum</th></tr></thead>
+      <tbody id="tabelaCompleta"></tbody></table>
     </div>
   </div>
 </section>
@@ -654,47 +335,8 @@ const FRANQUIA = {
   waTotal:7720000,   waMensal:321667
 };
 
-// ===== EXTRA MESES — embutidos no arquivo (não depende de localStorage) =====
-let extras = [];
-
-// Sincroniza com localStorage como backup
-if(!extras.length) extras = JSON.parse(localStorage.getItem('sf_extras')||'[]');
-
-// Remove do extras qualquer mês que já está no BASE (evita duplicatas)
-extras = extras.filter(e => !BASE.labels.includes(e.label));
-localStorage.setItem('sf_extras', JSON.stringify(extras));
-
-function persistExtras(){
-  localStorage.setItem('sf_extras', JSON.stringify(extras));
-}
-
-function exportarIndex(){
-  // Lê o HTML atual do admin
-  const html = document.documentElement.outerHTML;
-
-  // Substitui os extras embutidos com os dados atuais
-  const extrasJSON = JSON.stringify(extras);
-  const updated = html.replace(
-    /let extras = \[\/\*SF_EXTRAS\*\/\];[\s\S]*?if\(!extras\.length\) extras = JSON\.parse\(localStorage\.getItem\('sf_extras'\)\|\|'\[\]'\);/,
-    `let extras = ${extrasJSON};\n\n// Sincroniza com localStorage como backup\nif(!extras.length) extras = JSON.parse(localStorage.getItem('sf_extras')||'[]');`
-  );
-
-  // Remove botão de atualizar mês, aba calculadora, e seção calculadora para gerar index limpo
-  let indexHtml = updated
-    .replace(/<button class="update-btn"[^>]*>[\s\S]*?<\/button>/, '')
-    .replace(/<button[^>]*onclick="showTab\('calculadora'[^>]*>[\s\S]*?<\/button>/, '')
-    .replace(/<!-- CALCULADORA DE RATEIO -->[\s\S]*?<\/section>\s*\n\s*<\/main>/, '</main>')
-    .replace(/\/\* CALCULADORA \*\/[\s\S]*?\/\* TOAST \*\//, '/* TOAST */');
-
-  // Download
-  const blob = new Blob([indexHtml], {type:'text/html'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'index.html';
-  a.click();
-  URL.revokeObjectURL(a.href);
-  showToast('index.html exportado com sucesso!');
-}
+// ===== EXTRA MESES (adicionados pelo usuário) =====
+let extras = JSON.parse(localStorage.getItem('sf_extras')||'[]');
 
 // ===== COMPUTED DATA =====
 function computeData() {
@@ -727,7 +369,7 @@ function computeData() {
 
 // ===== FORMAT =====
 const fmtN = n => Math.round(n).toLocaleString('pt-BR');
-const fmt  = n => { if(!n && n!==0) return '—'; if(Math.abs(n)>=1e9) return (n/1e9).toFixed(1)+'Bi'; if(Math.abs(n)>=1e6) return (n/1e6).toFixed(1)+'M'; if(Math.abs(n)>=1e3) return Math.round(n/1e3)+'K'; return Math.round(n).toString(); };
+const fmt  = n => n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':fmtN(n);
 const pct  = (a,b) => (a/b*100).toFixed(1)+'%';
 const badge = (a,b) => {
   if(a>b) return '<span class="kpi-badge badge-red">Acima da franquia</span>';
@@ -798,10 +440,8 @@ function buildCharts(D){
   });
 
   // ---- GRÁFICO DE PROJEÇÃO ----
-  window._dadosProjecao = computeData();
+  window._dadosProjecao = computeData(); // guarda referência global para o filtro
   buildProjecao('total');
-  buildProjecaoSMS(window._dadosProjecao);
-  buildProjecaoWA(window._dadosProjecao);
   // ---- FIM PROJEÇÃO ----
 
   charts.sms=new Chart(document.getElementById('chartSMS'),{
@@ -866,17 +506,7 @@ function buildProjecao(area) {
   }
 
   const acumAtual = serieRealAcum.at(-1);
-  // Média dos últimos 6 meses (ou todos se menos de 6)
-  const ultimos6 = serieRealAcum.length >= 6
-    ? serieRealAcum.slice(-6).reduce((a,b,i,arr)=> i===0 ? b : b - arr[i-1], 0) // diferenças mensais
-    : null;
-  // Calcula consumo mensal dos últimos 6 períodos
-  const rawSerie = area === 'total' ? D.totalMensal
-    : area === 'redacao' ? D.redacao
-    : area === 'circulacao' ? D.circulacao
-    : D.marketing;
-  const janela = Math.min(rawSerie.length, 6);
-  const mediaMensal = rawSerie.slice(-janela).reduce((s,v)=>s+v,0) / janela;
+  const mediaMensal = acumAtual / nReal;
   const mesesRestantes = allMonths.length - nReal;
   const franquiaRestante = cfg.franquia - acumAtual;
   const mesesParaEsgotar = Math.floor(franquiaRestante / mediaMensal);
@@ -886,12 +516,9 @@ function buildProjecao(area) {
   let acumProj = acumAtual;
   allMonths.forEach((m, i) => {
     serieFranquia.push(cfg.franquia);
-    if (i < nReal - 1) {
+    if (i < nReal) {
       serieReal.push(serieRealAcum[i]);
-      serieProj.push(null);
-    } else if (i === nReal - 1) {
-      serieReal.push(serieRealAcum[i]);
-      serieProj.push(serieRealAcum[i]); // ponto de toque no último real
+      serieProj.push(i === nReal - 1 ? serieRealAcum[i] : null);
     } else {
       serieReal.push(null);
       acumProj += mediaMensal;
@@ -901,23 +528,11 @@ function buildProjecao(area) {
 
   // Calcula mês de esgotamento
   let mesEsgotamento = null;
-  let idxEsgotamento = null;
   let acumCheck = acumAtual;
   for (let i = nReal; i < allMonths.length; i++) {
     acumCheck += mediaMensal;
-    if (acumCheck >= cfg.franquia && !mesEsgotamento) {
-      mesEsgotamento = allMonths[i];
-      idxEsgotamento = i;
-    }
+    if (acumCheck >= cfg.franquia && !mesEsgotamento) mesEsgotamento = allMonths[i];
   }
-
-  // Meses entre esgotamento e fim do contrato (Set/27 = índice 24)
-  const idxFimContrato = allMonths.length - 1;
-  const mesesAntesDoFim = idxEsgotamento !== null ? idxFimContrato - idxEsgotamento : 0;
-
-  // Formatação legível para franquias grandes
-  const fmtFranquia = n => n >= 1e9 ? (n/1e9).toFixed(2).replace('.',',') + ' Bi'
-    : n >= 1e6 ? (n/1e6).toFixed(1).replace('.',',') + ' M' : fmtN(n);
 
   // Alerta
   const alertaEl = document.getElementById('alertaProjecaoFiltro');
@@ -928,9 +543,9 @@ function buildProjecao(area) {
         <div style="font-size:18px;flex-shrink:0;">⚠️</div>
         <div style="font-size:12px;color:var(--text2);line-height:1.7;">
           <strong style="color:var(--red)">${nomeArea}:</strong> mantendo a média de <strong style="color:var(--text)">${fmt(mediaMensal)}/mês</strong>, 
-          a franquia de <strong style="color:var(--text)">${fmtFranquia(cfg.franquia)}</strong> será esgotada em 
+          a franquia de <strong style="color:var(--text)">${fmt(cfg.franquia)}</strong> será esgotada em 
           <strong style="color:var(--red)">${mesEsgotamento}</strong> — 
-          <strong style="color:var(--red)">${mesesAntesDoFim} ${mesesAntesDoFim===1?'mês':'meses'}</strong> antes do fim do contrato.
+          <strong style="color:var(--red)">${mesesParaEsgotar} ${mesesParaEsgotar===1?'mês':'meses'}</strong> antes do fim do contrato.
         </div>
       </div>`;
   } else {
@@ -940,8 +555,8 @@ function buildProjecao(area) {
         <div style="font-size:18px;flex-shrink:0;">✅</div>
         <div style="font-size:12px;color:var(--text2);line-height:1.7;">
           <strong style="color:var(--green)">${nomeArea}:</strong> mantendo a média de <strong style="color:var(--text)">${fmt(mediaMensal)}/mês</strong>, 
-          a franquia de <strong style="color:var(--text)">${fmtFranquia(cfg.franquia)}</strong> será suficiente até Set/2027 com sobra estimada de 
-          <strong style="color:var(--green)">${fmt(Math.max(0,sobra))}</strong> disparos.
+          a franquia de <strong style="color:var(--text)">${fmt(cfg.franquia)}</strong> será suficiente até Set/2027 com sobra estimada de 
+          <strong style="color:var(--green)">${fmt(sobra)}</strong> disparos.
         </div>
       </div>`;
   }
@@ -955,7 +570,7 @@ function buildProjecao(area) {
       labels: allMonths,
       datasets: [
         {label:`Acumulado Real — ${nomeArea}`,data:serieReal,borderColor:cfg.cor,backgroundColor:cfg.cor+'20',fill:true,tension:0.3,pointRadius:4,pointHoverRadius:6,borderWidth:2,spanGaps:false},
-        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,pointStyle:'circle',pointBackgroundColor:'transparent',borderWidth:2,borderDash:[6,3],spanGaps:false},
+        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,borderWidth:2,borderDash:[6,3],spanGaps:false},
         {label:`Franquia ${nomeArea} (${fmt(cfg.franquia)})`,data:serieFranquia,borderColor:r,borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,backgroundColor:'transparent'}
       ]
     },
@@ -979,209 +594,6 @@ function setFiltroProjecao(area, btn) {
   buildProjecao(area);
 }
 
-function buildProjecaoSMS(D) {
-  if (!D) return;
-  const r = redColor(), am = themeMode==='dark'?'#f59e0b':'#d97706';
-  const a = accentColor();
-  const nReal = D.labels.length;
-  const franquia = FRANQUIA.smsTotal;
-
-  const janelaSMS = Math.min(D.sms.length, 6);
-  const mediaMensal = D.sms.slice(-janelaSMS).reduce((s,v)=>s+v,0) / janelaSMS;
-  const franquiaRestante = franquia - D.smsAcum.at(-1);
-  const mesesRestantes = allMonths.length - nReal;
-
-  const serieReal = [], serieProj = [], serieFranquia = [];
-  let acumProj = D.smsAcum.at(-1);
-  const acumAtualSMS = D.smsAcum.at(-1);
-
-  allMonths.forEach((m, i) => {
-    serieFranquia.push(franquia);
-    if (i < nReal - 1) {
-      serieReal.push(D.smsAcum[i]);
-      serieProj.push(null);
-    } else if (i === nReal - 1) {
-      serieReal.push(D.smsAcum[i]);
-      serieProj.push(D.smsAcum[i]);
-    } else {
-      serieReal.push(null);
-      acumProj += mediaMensal;
-      serieProj.push(Math.min(acumProj, franquia * 1.15));
-    }
-  });
-
-  let mesEsgotamento = null;
-  let idxEsgotamentoSMS = null;
-  let acumCheck = D.smsAcum.at(-1);
-  for (let i = nReal; i < allMonths.length; i++) {
-    acumCheck += mediaMensal;
-    if (acumCheck >= franquia && !mesEsgotamento) {
-      mesEsgotamento = allMonths[i];
-      idxEsgotamentoSMS = i;
-    }
-  }
-
-  const fmtFranquiaSMS = n => n >= 1e9 ? (n/1e9).toFixed(2).replace('.',',') + ' Bi'
-    : n >= 1e6 ? (n/1e6).toFixed(1).replace('.',',') + ' M' : fmtN(n);
-  const mesesAntesDoFimSMS = idxEsgotamentoSMS !== null ? (allMonths.length - 1) - idxEsgotamentoSMS : 0;
-
-  const alertaEl = document.getElementById('alertaProjecaoSMSFiltro');
-  if (alertaEl) {
-    if (mesEsgotamento) {
-      alertaEl.innerHTML = `
-        <div style="background:rgba(239,68,68,0.08);border:1px solid var(--red);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
-          <div style="font-size:18px;flex-shrink:0;">⚠️</div>
-          <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-            <strong style="color:var(--red)">SMS/MMS:</strong> mantendo a média de <strong style="color:var(--text)">${fmtN(Math.round(mediaMensal))}/mês</strong>, 
-            a franquia de <strong style="color:var(--text)">${fmtFranquiaSMS(franquia)}</strong> será esgotada em 
-            <strong style="color:var(--red)">${mesEsgotamento}</strong> — 
-            <strong style="color:var(--red)">${mesesAntesDoFimSMS} ${mesesAntesDoFimSMS===1?'mês':'meses'}</strong> antes do fim do contrato.
-          </div>
-        </div>`;
-    } else {
-      const sobra = franquiaRestante - (mesesRestantes * mediaMensal);
-      alertaEl.innerHTML = `
-        <div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
-          <div style="font-size:18px;flex-shrink:0;">✅</div>
-          <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-            <strong style="color:var(--green)">SMS/MMS:</strong> mantendo a média de <strong style="color:var(--text)">${fmtN(Math.round(mediaMensal))}/mês</strong>, 
-            a franquia de <strong style="color:var(--text)">${fmtFranquiaSMS(franquia)}</strong> será suficiente até Set/2027 com sobra estimada de 
-            <strong style="color:var(--green)">${fmtN(Math.round(Math.max(0,sobra)))}</strong> disparos.
-          </div>
-        </div>`;
-    }
-  }
-
-  const c = chartColors();
-  if (charts.projecaoSMS) { charts.projecaoSMS.destroy(); delete charts.projecaoSMS; }
-  charts.projecaoSMS = new Chart(document.getElementById('chartProjecaoSMS'), {
-    type: 'line',
-    data: {
-      labels: allMonths,
-      datasets: [
-        {label:'Acumulado Real — SMS/MMS',data:serieReal,borderColor:a,backgroundColor:a+'20',fill:true,tension:0.3,pointRadius:4,pointHoverRadius:6,borderWidth:2,spanGaps:false},
-        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,pointStyle:'circle',pointBackgroundColor:'transparent',borderWidth:2,borderDash:[6,3],spanGaps:false},
-        {label:`Franquia SMS (${fmtFranquiaSMS(franquia)})`,data:serieFranquia,borderColor:r,borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,backgroundColor:'transparent'}
-      ]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      plugins:{
-        legend:{labels:{color:c.legend,boxWidth:12,font:{size:11,family:'DM Mono'}}},
-        tooltip:{callbacks:{label:ctx=>ctx.raw!==null?` ${ctx.dataset.label}: ${fmtN(Math.round(ctx.raw))}`:null}}
-      },
-      scales:{
-        x:{grid:{color:c.grid},ticks:{color:c.tick,font:{size:10},maxRotation:45,minRotation:45}},
-        y:{grid:{color:c.grid},ticks:{color:c.tick,font:{size:11},callback:v=>fmtN(Math.round(v))}}
-      }
-    }
-  });
-}
-
-function buildProjecaoWA(D) {
-  if (!D) return;
-  const r = redColor(), am = themeMode==='dark'?'#f59e0b':'#d97706';
-  const g = greenColor();
-  const nReal = D.labels.length;
-  const franquia = FRANQUIA.waTotal;
-
-  // Média dos últimos 6 meses (ou todos se menos de 6)
-  const janelaWA = Math.min(D.wa.length, 6);
-  const mediaMensal = D.wa.slice(-janelaWA).reduce((s,v)=>s+v,0) / janelaWA;
-  const franquiaRestante = franquia - D.waAcum.at(-1);
-  const mesesRestantes = allMonths.length - nReal;
-
-  // Acumulado real
-  const serieReal = [], serieProj = [], serieFranquia = [];
-  let acumProj = D.waAcum.at(-1);
-  const acumAtualWA = D.waAcum.at(-1);
-
-  allMonths.forEach((m, i) => {
-    serieFranquia.push(franquia);
-    if (i < nReal - 1) {
-      serieReal.push(D.waAcum[i]);
-      serieProj.push(null);
-    } else if (i === nReal - 1) {
-      serieReal.push(D.waAcum[i]);
-      serieProj.push(D.waAcum[i]);
-    } else {
-      serieReal.push(null);
-      acumProj += mediaMensal;
-      serieProj.push(Math.min(acumProj, franquia * 1.15));
-    }
-  });
-
-  // Mês de esgotamento
-  let mesEsgotamento = null;
-  let idxEsgotamentoWA = null;
-  let acumCheck = D.waAcum.at(-1);
-  for (let i = nReal; i < allMonths.length; i++) {
-    acumCheck += mediaMensal;
-    if (acumCheck >= franquia && !mesEsgotamento) {
-      mesEsgotamento = allMonths[i];
-      idxEsgotamentoWA = i;
-    }
-  }
-
-  const fmtFranquiaWA = n => n >= 1e9 ? (n/1e9).toFixed(2).replace('.',',') + ' Bi'
-    : n >= 1e6 ? (n/1e6).toFixed(1).replace('.',',') + ' M' : fmtN(n);
-  const mesesAntesDoFimWA = idxEsgotamentoWA !== null ? (allMonths.length - 1) - idxEsgotamentoWA : 0;
-
-  // Alerta
-  const alertaEl = document.getElementById('alertaProjecaoWAFiltro');
-  if (alertaEl) {
-    if (mesEsgotamento) {
-      alertaEl.innerHTML = `
-        <div style="background:rgba(239,68,68,0.08);border:1px solid var(--red);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
-          <div style="font-size:18px;flex-shrink:0;">⚠️</div>
-          <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-            <strong style="color:var(--red)">WhatsApp:</strong> mantendo a média de <strong style="color:var(--text)">${fmt(mediaMensal)}/mês</strong>, 
-            a franquia de <strong style="color:var(--text)">${fmtFranquiaWA(franquia)}</strong> será esgotada em 
-            <strong style="color:var(--red)">${mesEsgotamento}</strong> — 
-            <strong style="color:var(--red)">${mesesAntesDoFimWA} ${mesesAntesDoFimWA===1?'mês':'meses'}</strong> antes do fim do contrato.
-          </div>
-        </div>`;
-    } else {
-      const sobra = franquiaRestante - (mesesRestantes * mediaMensal);
-      alertaEl.innerHTML = `
-        <div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
-          <div style="font-size:18px;flex-shrink:0;">✅</div>
-          <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-            <strong style="color:var(--green)">WhatsApp:</strong> mantendo a média de <strong style="color:var(--text)">${fmt(mediaMensal)}/mês</strong>, 
-            a franquia de <strong style="color:var(--text)">${fmtFranquiaWA(franquia)}</strong> será suficiente até Set/2027 com sobra estimada de 
-            <strong style="color:var(--green)">${fmt(Math.max(0,sobra))}</strong> disparos.
-          </div>
-        </div>`;
-    }
-  }
-
-  // Gráfico
-  const c = chartColors();
-  if (charts.projecaoWA) { charts.projecaoWA.destroy(); delete charts.projecaoWA; }
-  charts.projecaoWA = new Chart(document.getElementById('chartProjecaoWA'), {
-    type: 'line',
-    data: {
-      labels: allMonths,
-      datasets: [
-        {label:'Acumulado Real — WhatsApp',data:serieReal,borderColor:g,backgroundColor:g+'20',fill:true,tension:0.3,pointRadius:4,pointHoverRadius:6,borderWidth:2,spanGaps:false},
-        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,pointStyle:'circle',pointBackgroundColor:'transparent',borderWidth:2,borderDash:[6,3],spanGaps:false},
-        {label:`Franquia WhatsApp (${fmt(franquia)})`,data:serieFranquia,borderColor:r,borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,backgroundColor:'transparent'}
-      ]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      plugins:{
-        legend:{labels:{color:c.legend,boxWidth:12,font:{size:11,family:'DM Mono'}}},
-        tooltip:{callbacks:{label:ctx=>ctx.raw!==null?` ${ctx.dataset.label}: ${fmt(ctx.raw)}`:null}}
-      },
-      scales:{
-        x:{grid:{color:c.grid},ticks:{color:c.tick,font:{size:10},maxRotation:45,minRotation:45}},
-        y:{grid:{color:c.grid},ticks:{color:c.tick,font:{size:11},callback:v=>fmt(v)}}
-      }
-    }
-  });
-}
-
 // ===== RENDER ALL =====
 function renderAll(){
   const D=computeData();
@@ -1197,23 +609,11 @@ function renderKPIs(D){
   const smsAcum=D.smsAcum.at(-1);
   const waAcum=D.waAcum.at(-1);
   const n=D.labels.length;
-
-  // Média pelos últimos 6 meses (ou todos se menos de 6)
-  const m6 = n => Math.min(n, 6);
-  const media6 = arr => arr.slice(-m6(arr.length)).reduce((s,v)=>s+v,0) / m6(arr.length);
-
-  const mediaSM  = media6(D.totalMensal);
-  const mediaSMS = media6(D.sms);
-  const mediaWA  = media6(D.wa);
-  const mediaRed = media6(D.redacao);
-  const mediaCir = media6(D.circulacao);
-  const mediaMkt = media6(D.marketing);
-
+  const mediaSM=smAcum/n, mediaSMS=smsAcum/n, mediaWA=waAcum/n;
   const totRed=D.redacao.reduce((s,v)=>s+v,0);
   const totCir=D.circulacao.reduce((s,v)=>s+v,0);
   const totMkt=D.marketing.reduce((s,v)=>s+v,0);
-
-  const subMedia = n <= 6 ? `Média dos ${n} meses disponíveis` : 'Média dos últimos 6 meses';
+  const mediaRed=totRed/n, mediaCir=totCir/n, mediaMkt=totMkt/n;
 
   document.getElementById('kpiResumoAcum').innerHTML=`
     <div class="kpi"><div class="kpi-label">Super Messages · Acumulado</div><div class="kpi-value">${fmt(smAcum)}</div><div class="kpi-sub">Franquia 24m: ${fmtN(FRANQUIA.smTotal)}</div>${usePct(smAcum,FRANQUIA.smTotal)}</div>
@@ -1221,9 +621,9 @@ function renderKPIs(D){
     <div class="kpi"><div class="kpi-label">WhatsApp · Acumulado</div><div class="kpi-value">${fmtN(waAcum)}</div><div class="kpi-sub">Franquia 24m: ${fmtN(FRANQUIA.waTotal)}</div>${usePct(waAcum,FRANQUIA.waTotal)}</div>`;
 
   document.getElementById('kpiResumoMedia').innerHTML=`
-    <div class="kpi"><div class="kpi-label">Média Mensal · Super Messages</div><div class="kpi-value">${fmt(mediaSM)}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.smMensal)} · ${subMedia}</div>${badge(mediaSM,FRANQUIA.smMensal)}</div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · SMS/MMS</div><div class="kpi-value">${fmtN(Math.round(mediaSMS))}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.smsMensal)} · ${subMedia}</div>${badge(mediaSMS,FRANQUIA.smsMensal)}</div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · WhatsApp</div><div class="kpi-value">${fmtN(Math.round(mediaWA))}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.waMensal)} · ${subMedia}</div>${badge(mediaWA,FRANQUIA.waMensal)}</div>`;
+    <div class="kpi"><div class="kpi-label">Média Mensal · Super Messages</div><div class="kpi-value">${fmt(mediaSM)}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.smMensal)}</div>${badge(mediaSM,FRANQUIA.smMensal)}</div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · SMS/MMS</div><div class="kpi-value">${fmtN(Math.round(mediaSMS))}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.smsMensal)}</div>${badge(mediaSMS,FRANQUIA.smsMensal)}</div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · WhatsApp</div><div class="kpi-value">${fmtN(Math.round(mediaWA))}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.waMensal)}</div>${badge(mediaWA,FRANQUIA.waMensal)}</div>`;
 
   document.getElementById('kpiSuperAcum').innerHTML=`
     <div class="kpi"><div class="kpi-label">Redação · Acumulado</div><div class="kpi-value">${fmt(totRed)}</div><div class="kpi-sub">Franquia 24m: ${fmtN(FRANQUIA.redacao)} · Part.: ${pct(totRed,smAcum)}</div>${usePct(totRed,FRANQUIA.redacao)}</div>
@@ -1232,19 +632,19 @@ function renderKPIs(D){
     <div class="kpi"><div class="kpi-label">Total Acumulado SM</div><div class="kpi-value">${fmt(smAcum)}</div><div class="kpi-sub">Franquia 24m: ${fmtN(FRANQUIA.smTotal)}</div>${usePct(smAcum,FRANQUIA.smTotal)}</div>`;
 
   document.getElementById('kpiSuperMedia').innerHTML=`
-    <div class="kpi"><div class="kpi-label">Média Mensal · Redação</div><div class="kpi-value">${fmt(mediaRed)}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.redacaoMensal)} · ${subMedia}</div>${badge(mediaRed,FRANQUIA.redacaoMensal)}</div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · Circulação</div><div class="kpi-value">${fmt(mediaCir)}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.circulacaoMensal)} · ${subMedia}</div>${badge(mediaCir,FRANQUIA.circulacaoMensal)}</div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · Marketing</div><div class="kpi-value">${fmt(mediaMkt)}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.marketingMensal)} · ${subMedia}</div>${badge(mediaMkt,FRANQUIA.marketingMensal)}</div>`;
+    <div class="kpi"><div class="kpi-label">Média Mensal · Redação</div><div class="kpi-value">${fmt(mediaRed)}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.redacaoMensal)}</div>${badge(mediaRed,FRANQUIA.redacaoMensal)}</div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · Circulação</div><div class="kpi-value">${fmt(mediaCir)}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.circulacaoMensal)}</div>${badge(mediaCir,FRANQUIA.circulacaoMensal)}</div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · Marketing</div><div class="kpi-value">${fmt(mediaMkt)}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.marketingMensal)}</div>${badge(mediaMkt,FRANQUIA.marketingMensal)}</div>`;
 
   document.getElementById('kpiSMS').innerHTML=`
     <div class="kpi"><div class="kpi-label">Acumulado</div><div class="kpi-value">${fmtN(smsAcum)}</div><div class="kpi-sub">Franquia 24m: ${fmtN(FRANQUIA.smsTotal)}</div>${usePct(smsAcum,FRANQUIA.smsTotal)}</div>
-    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">${fmtN(Math.round(mediaSMS))}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.smsMensal)} · ${subMedia}</div>${badge(mediaSMS,FRANQUIA.smsMensal)}</div>
+    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">${fmtN(Math.round(mediaSMS))}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.smsMensal)}</div>${badge(mediaSMS,FRANQUIA.smsMensal)}</div>
     <div class="kpi"><div class="kpi-label">Valor pago</div><div class="kpi-value">R$ 5,38</div><div class="kpi-sub">Por pacote de 1.000</div></div>
     <div class="kpi"><div class="kpi-label">Saldo restante</div><div class="kpi-value">${fmtN(FRANQUIA.smsTotal-smsAcum)}</div><div class="kpi-sub">Franquia total: ${fmtN(FRANQUIA.smsTotal)}</div><span class="kpi-badge badge-green">${(100-smsAcum/FRANQUIA.smsTotal*100).toFixed(1)}% disponível</span></div>`;
 
   document.getElementById('kpiWA').innerHTML=`
     <div class="kpi"><div class="kpi-label">Acumulado</div><div class="kpi-value">${fmtN(waAcum)}</div><div class="kpi-sub">Franquia 24m: ${fmtN(FRANQUIA.waTotal)}</div>${usePct(waAcum,FRANQUIA.waTotal)}</div>
-    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">${fmtN(Math.round(mediaWA))}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.waMensal)} · ${subMedia}</div>${badge(mediaWA,FRANQUIA.waMensal)}</div>
+    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">${fmtN(Math.round(mediaWA))}</div><div class="kpi-sub">Franquia mensal: ${fmtN(FRANQUIA.waMensal)}</div>${badge(mediaWA,FRANQUIA.waMensal)}</div>
     <div class="kpi"><div class="kpi-label">Valor pago</div><div class="kpi-value">R$ 5,38</div><div class="kpi-sub">Por pacote de 1.000</div></div>
     <div class="kpi"><div class="kpi-label">Saldo restante</div><div class="kpi-value">${fmtN(FRANQUIA.waTotal-waAcum)}</div><div class="kpi-sub">Franquia total: ${fmtN(FRANQUIA.waTotal)}</div><span class="kpi-badge badge-green">${(100-waAcum/FRANQUIA.waTotal*100).toFixed(1)}% disponível</span></div>`;
 }
@@ -1280,39 +680,12 @@ function buildTables(D){
   const ids=['tabelaCompleta','tabelaSuper','tabelaSMS','tabelaWA'];
   ids.forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});
 
-  // Completa — com bordas separando grupos por produto
+  // Completa
   const tc=document.getElementById('tabelaCompleta');
-  const bSM  = 'border-left:2px solid var(--accent);';
-  const bSMR = 'border-right:2px solid var(--accent);';
-  const bSMS = 'border-right:2px solid #7c3aed;';
-  const bMes = 'border-right:2px solid var(--border);text-align:left;font-family:\'Sora\',sans-serif;font-weight:500;';
-
   D.labels.forEach((_,i)=>{
-    tc.innerHTML+=`<tr>
-      <td style="${bMes}">${D.labels[i]}</td>
-      <td style="${bSM}">${fmtN(D.redacao[i])}</td>
-      <td>${fmtN(D.circulacao[i])}</td>
-      <td>${fmtN(D.marketing[i])}</td>
-      <td>${fmtN(D.totalMensal[i])}</td>
-      <td style="${bSMR}color:var(--accent);">${fmtN(D.totalAcumSM[i])}</td>
-      <td>${fmtN(D.sms[i])}</td>
-      <td style="${bSMS}color:#7c3aed;">${fmtN(D.smsAcum[i])}</td>
-      <td>${fmtN(D.wa[i])}</td>
-      <td style="color:var(--green);">${fmtN(D.waAcum[i])}</td>
-    </tr>`;
+    tc.innerHTML+=`<tr><td>${D.labels[i]}</td><td>${fmtN(D.redacao[i])}</td><td>${fmtN(D.circulacao[i])}</td><td>${fmtN(D.marketing[i])}</td><td>${fmtN(D.totalMensal[i])}</td><td>${fmtN(D.totalAcumSM[i])}</td><td>${fmtN(D.sms[i])}</td><td>${fmtN(D.smsAcum[i])}</td><td>${fmtN(D.wa[i])}</td><td>${fmtN(D.waAcum[i])}</td></tr>`;
   });
-  tc.innerHTML+=`<tr class="total-row">
-    <td style="${bMes}">ACUMULADO</td>
-    <td style="${bSM}">${fmtN(D.redacao.reduce((a,b)=>a+b))}</td>
-    <td>${fmtN(D.circulacao.reduce((a,b)=>a+b))}</td>
-    <td>${fmtN(D.marketing.reduce((a,b)=>a+b))}</td>
-    <td>${fmtN(D.totalMensal.reduce((a,b)=>a+b))}</td>
-    <td style="${bSMR}color:var(--accent);">${fmtN(D.totalAcumSM.at(-1))}</td>
-    <td>${fmtN(D.sms.reduce((a,b)=>a+b))}</td>
-    <td style="${bSMS}color:#7c3aed;">${fmtN(D.smsAcum.at(-1))}</td>
-    <td>${fmtN(D.wa.reduce((a,b)=>a+b))}</td>
-    <td style="color:var(--green);">${fmtN(D.waAcum.at(-1))}</td>
-  </tr>`;
+  tc.innerHTML+=`<tr class="total-row"><td>ACUMULADO</td><td>${fmtN(D.redacao.reduce((a,b)=>a+b))}</td><td>${fmtN(D.circulacao.reduce((a,b)=>a+b))}</td><td>${fmtN(D.marketing.reduce((a,b)=>a+b))}</td><td>${fmtN(D.totalMensal.reduce((a,b)=>a+b))}</td><td class="acc">${fmtN(D.totalAcumSM.at(-1))}</td><td>${fmtN(D.sms.reduce((a,b)=>a+b))}</td><td class="acc">${fmtN(D.smsAcum.at(-1))}</td><td>${fmtN(D.wa.reduce((a,b)=>a+b))}</td><td class="acc">${fmtN(D.waAcum.at(-1))}</td></tr>`;
 
   // Super — com alerta vermelho por grupo quando acima da franquia mensal
   const ts=document.getElementById('tabelaSuper');
@@ -1351,55 +724,6 @@ function buildTables(D){
   wa.innerHTML+=`<tr class="total-row"><td>ACUMULADO</td><td>${fmtN(D.wa.reduce((a,b)=>a+b))}</td><td class="acc">${fmtN(D.waAcum.at(-1))}</td><td>—</td><td>${(D.waAcum.at(-1)/FRANQUIA.waTotal*100).toFixed(1)}% do total</td></tr>`;
 }
 
-// ===== MODAL =====
-function openModal(){
-  renderHistory();
-  document.getElementById('modalOverlay').classList.add('open');
-}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
-function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
-
-function saveMonth(){
-  const label=document.getElementById('fMes').value;
-  const redacao=parseFloat(document.getElementById('fRedacao').value)||0;
-  const circulacao=parseFloat(document.getElementById('fCirculacao').value)||0;
-  const marketing=parseFloat(document.getElementById('fMarketing').value)||0;
-  const sms=parseFloat(document.getElementById('fSMS').value)||0;
-  const wa=parseFloat(document.getElementById('fWA').value)||0;
-
-  if(!redacao&&!circulacao&&!marketing&&!sms&&!wa){showToast('Preencha ao menos um valor.','error');return;}
-
-  extras=extras.filter(e=>e.label!==label);
-  extras.push({label,redacao,circulacao,marketing,sms,wa});
-  persistExtras();
-
-  ['fRedacao','fCirculacao','fMarketing','fSMS','fWA'].forEach(id=>document.getElementById(id).value='');
-
-  renderHistory();
-  renderAll();
-  closeModal();
-  showToast(`Mês ${label} adicionado! Clique em "Exportar index.html" para publicar.`);
-}
-
-function deleteMonth(label){
-  extras=extras.filter(e=>e.label!==label);
-  persistExtras();
-  renderHistory();
-  renderAll();
-  showToast(`Mês ${label} removido.`);
-}
-
-function renderHistory(){
-  const el=document.getElementById('historyList');
-  if(!extras.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:6px 0;">Nenhum mês adicionado ainda.</div>';return;}
-  el.innerHTML=extras.map(e=>`
-    <div class="history-item">
-      <div><div class="history-item-label">${e.label}</div>
-      <div class="history-item-sub">SM: ${fmt(e.redacao+e.circulacao+e.marketing)} · SMS: ${fmtN(e.sms)} · WA: ${fmtN(e.wa)}</div></div>
-      <button class="history-del" onclick="deleteMonth('${e.label}')">✕</button>
-    </div>`).join('');
-}
-
 // ===== TOAST =====
 function showToast(msg,type){
   const t=document.getElementById('toast');
@@ -1429,118 +753,17 @@ function toggleTheme(){
   updateChartColors();
 }
 
-// ===== CALCULADORA DE RATEIO =====
-let calcHistorico = JSON.parse(localStorage.getItem('sf_rateio')||'[]');
-let ultimoCalc = null;
-
-function calcRateio() {
-  const sfTotal = parseFloat(document.getElementById('calcSfTotal').value)||0;
-  const mdCir   = parseFloat(document.getElementById('calcMdCir').value)||0;
-  const mdRed   = parseFloat(document.getElementById('calcMdRed').value)||0;
-  const mdMkt   = parseFloat(document.getElementById('calcMdMkt').value)||0;
-  const mdTotal = mdCir + mdRed + mdMkt;
-
-  document.getElementById('calcSfFmt').textContent = sfTotal ? fmtN(sfTotal) : '—';
-  document.getElementById('calcMdFmt').textContent = mdTotal ? fmtN(mdTotal) : '—';
-
-  if (!sfTotal || !mdTotal) {
-    document.getElementById('calcResultSection').style.display = 'none';
-    document.getElementById('calcValidacao').style.display = 'none';
-    return;
-  }
-
-  // Validação diferença
-  const diff = sfTotal - mdTotal;
-  const diffPct = Math.abs(diff / sfTotal * 100);
-  const valEl = document.getElementById('calcValidacao');
-  valEl.style.display = 'flex';
-  valEl.className = 'calc-validacao ' + (diffPct < 2 ? 'calc-val-ok' : diffPct < 5 ? 'calc-val-warn' : 'calc-val-alert');
-  document.getElementById('calcValIcon').textContent = diffPct < 2 ? '✓' : diffPct < 5 ? '⚠' : '✕';
-  document.getElementById('calcValText').textContent =
-    `Diferença entre fontes: ${fmtN(Math.abs(diff))} (${diffPct.toFixed(2)}%) — SF: ${fmtN(sfTotal)} · Marketdata: ${fmtN(mdTotal)}`;
-
-  // Rateio
-  const pctCir = mdCir / mdTotal;
-  const pctRed = mdRed / mdTotal;
-  const pctMkt = mdMkt / mdTotal;
-  const valCir = Math.round(sfTotal * pctCir);
-  const valRed = Math.round(sfTotal * pctRed);
-  const valMkt = Math.round(sfTotal * pctMkt);
-
-  document.getElementById('calcResultBody').innerHTML = `
-    <tr><td>Circulação</td><td>${fmtN(mdCir)}</td><td><span class="pct-pill">${(pctCir*100).toFixed(2)}%</span></td><td class="val-accent">${fmtN(valCir)}</td></tr>
-    <tr><td>Redação</td><td>${fmtN(mdRed)}</td><td><span class="pct-pill">${(pctRed*100).toFixed(2)}%</span></td><td class="val-accent">${fmtN(valRed)}</td></tr>
-    <tr><td>Marketing</td><td>${fmtN(mdMkt)}</td><td><span class="pct-pill">${(pctMkt*100).toFixed(2)}%</span></td><td class="val-accent">${fmtN(valMkt)}</td></tr>
-    <tr><td>TOTAL</td><td>${fmtN(mdTotal)}</td><td><span class="pct-pill">100%</span></td><td class="val-accent">${fmtN(sfTotal)}</td></tr>`;
-
-  document.getElementById('calcResultSection').style.display = 'block';
-  ultimoCalc = { mes:document.getElementById('calcMes').value, sfTotal, mdCir, mdRed, mdMkt, mdTotal, valCir, valRed, valMkt, diff, diffPct };
-}
-
-function enviarParaDashboard() {
-  if (!ultimoCalc) return;
-  // Seleciona o mês no modal
-  const selMes = document.getElementById('fMes');
-  for (let i = 0; i < selMes.options.length; i++) {
-    if (selMes.options[i].value === ultimoCalc.mes) { selMes.selectedIndex = i; break; }
-  }
-  // Preenche os campos do modal
-  document.getElementById('fRedacao').value    = ultimoCalc.valRed;
-  document.getElementById('fCirculacao').value = ultimoCalc.valCir;
-  document.getElementById('fMarketing').value  = ultimoCalc.valMkt;
-  // Abre o modal
-  openModal();
-  showToast(`Valores de ${ultimoCalc.mes} enviados! Complete SMS e WhatsApp e salve.`);
-}
-
-function salvarRateio() {
-  if (!ultimoCalc) return;
-  calcHistorico = calcHistorico.filter(h => h.mes !== ultimoCalc.mes);
-  calcHistorico.unshift(ultimoCalc);
-  localStorage.setItem('sf_rateio', JSON.stringify(calcHistorico));
-  renderCalcHistorico();
-  showToast(`Cálculo de ${ultimoCalc.mes} salvo!`);
-}
-
-function removerCalcHist(mes) {
-  calcHistorico = calcHistorico.filter(h => h.mes !== mes);
-  localStorage.setItem('sf_rateio', JSON.stringify(calcHistorico));
-  renderCalcHistorico();
-}
-
-function renderCalcHistorico() {
-  const el = document.getElementById('calcHistorico');
-  if (!calcHistorico.length) {
-    el.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:10px 0;text-align:center;">Nenhum cálculo salvo ainda.</div>';
-    return;
-  }
-  el.innerHTML = calcHistorico.map(h => `
-    <div class="calc-hist-item">
-      <div class="calc-hist-mes">${h.mes}</div>
-      <div class="calc-hist-vals">
-        <div class="calc-hist-bu">Circulação <span>${fmtN(h.valCir)}</span></div>
-        <div class="calc-hist-bu">Redação <span>${fmtN(h.valRed)}</span></div>
-        <div class="calc-hist-bu">Marketing <span>${fmtN(h.valMkt)}</span></div>
-        <div class="calc-hist-bu" style="color:var(--accent);">Total SF: <span>${fmtN(h.sfTotal)}</span></div>
-        <div class="calc-hist-bu" style="color:${h.diffPct<2?'var(--green)':h.diffPct<5?'var(--amber)':'var(--red)'}">Δ ${fmtN(Math.abs(h.diff))} (${h.diffPct.toFixed(1)}%)</div>
-      </div>
-      <button class="calc-hist-del" onclick="removerCalcHist('${h.mes}')">✕</button>
-    </div>`).join('');
-}
-
-function limparCalc() {
-  ['calcSfTotal','calcMdCir','calcMdRed','calcMdMkt'].forEach(id => document.getElementById(id).value='');
-  document.getElementById('calcSfFmt').textContent = '—';
-  document.getElementById('calcMdFmt').textContent = '—';
-  document.getElementById('calcValidacao').style.display = 'none';
-  document.getElementById('calcResultSection').style.display = 'none';
-  ultimoCalc = null;
-}
-
 // ===== INIT =====
 renderAll();
-renderCalcHistorico();
+
+// Garante que sempre abre no Resumo Geral
+window.addEventListener('load', () => {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('resumo').classList.add('active');
+  document.querySelector('.tab').classList.add('active');
+  window.scrollTo(0, 0);
+});
 </script>
-
-
-</body></html>
+</body>
+</html>
