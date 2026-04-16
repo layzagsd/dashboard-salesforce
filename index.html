@@ -205,7 +205,7 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
           <label>Mês de referência</label>
           <select id="fMes">
             <option value="Jan/26">Jan/26</option><option value="Fev/26">Fev/26</option>
-            <option value="Mar/26" selected="">Mar/26</option><option value="Abr/26">Abr/26</option>
+            <option value="Mar/26">Mar/26</option><option value="Abr/26" selected="">Abr/26</option>
             <option value="Mai/26">Mai/26</option><option value="Jun/26">Jun/26</option>
             <option value="Jul/26">Jul/26</option><option value="Ago/26">Ago/26</option>
             <option value="Set/26">Set/26</option><option value="Out/26">Out/26</option>
@@ -285,10 +285,10 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
 
 <nav>
   <button class="tab" onclick="showTab('resumo',this)">Resumo Geral</button>
-  <button class="tab" onclick="showTab('super',this)">Super Messages</button>
+  <button class="tab active" onclick="showTab('super',this)">Super Messages</button>
   <button class="tab" onclick="showTab('sms',this)">SMS / MMS</button>
   <button class="tab" onclick="showTab('whatsapp',this)">WhatsApp</button>
-  <button class="tab active" onclick="showTab('detalhe',this)">Tabela Mensal</button>
+  <button class="tab" onclick="showTab('detalhe',this)">Tabela Mensal</button>
   
 </nav>
 
@@ -298,32 +298,32 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
 <section id="resumo" class="section">
   <div class="section-title">Acumulado por Canal</div>
   <div class="kpi-grid" id="kpiResumoAcum">
-    <div class="kpi"><div class="kpi-label">Super Messages · Acumulado</div><div class="kpi-value">468.5M</div><div class="kpi-sub">Franquia 24m: 1.410.040.000</div><span class="kpi-badge badge-green">33.2% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">SMS/MMS · Acumulado</div><div class="kpi-value">995.112</div><div class="kpi-sub">Franquia 24m: 10.650.000</div><span class="kpi-badge badge-green">9.3% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">WhatsApp · Acumulado</div><div class="kpi-value">956.987</div><div class="kpi-sub">Franquia 24m: 7.720.000</div><span class="kpi-badge badge-green">12.4% utilizado</span></div></div>
+    <div class="kpi"><div class="kpi-label">Super Messages · Acumulado</div><div class="kpi-value">399.9M</div><div class="kpi-sub">Franquia 24m: 1.410.040.000</div><span class="kpi-badge badge-green">28.4% utilizado</span></div>
+    <div class="kpi"><div class="kpi-label">SMS/MMS · Acumulado</div><div class="kpi-value">946.686</div><div class="kpi-sub">Franquia 24m: 10.650.000</div><span class="kpi-badge badge-green">8.9% utilizado</span></div>
+    <div class="kpi"><div class="kpi-label">WhatsApp · Acumulado</div><div class="kpi-value">924.344</div><div class="kpi-sub">Franquia 24m: 7.720.000</div><span class="kpi-badge badge-green">12.0% utilizado</span></div></div>
   <div class="section-title">Média Mensal por Canal</div>
   <div class="kpi-grid" id="kpiResumoMedia">
-    <div class="kpi"><div class="kpi-label">Média Mensal · Super Messages</div><div class="kpi-value">65.3M</div><div class="kpi-sub">Franquia mensal: 57.083.333 · Média dos últimos 6 meses</div><span class="kpi-badge badge-red">Acima da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · SMS/MMS</div><div class="kpi-value">112.753</div><div class="kpi-sub">Franquia mensal: 443.750 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · WhatsApp</div><div class="kpi-value">132.167</div><div class="kpi-sub">Franquia mensal: 321.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div></div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · Super Messages</div><div class="kpi-value">64.2M</div><div class="kpi-sub">Franquia mensal: 57.083.333 · Média dos últimos 6 meses</div><span class="kpi-badge badge-red">Acima da franquia</span></div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · SMS/MMS</div><div class="kpi-value">138.711</div><div class="kpi-sub">Franquia mensal: 443.750 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · WhatsApp</div><div class="kpi-value">154.006</div><div class="kpi-sub">Franquia mensal: 321.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div></div>
 
   <div class="charts-only">
     <div class="section-title">Utilização da Franquia Total (24 meses)</div>
     <div class="prog-section" id="progSection">
     <div class="prog-item">
-      <div class="prog-header"><div class="prog-title">Super Messages</div><div class="prog-stats">468.496.515 / 1.410.040.000&nbsp;|&nbsp;<span style="color:var(--green)">33.2%</span></div></div>
-      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:33.2%"></div></div>
-      <div class="prog-labels"><span>0</span><span>33.2%</span><span>100%</span></div>
+      <div class="prog-header"><div class="prog-title">Super Messages</div><div class="prog-stats">399.909.996 / 1.410.040.000&nbsp;|&nbsp;<span style="color:var(--green)">28.4%</span></div></div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:28.4%"></div></div>
+      <div class="prog-labels"><span>0</span><span>28.4%</span><span>100%</span></div>
     </div>
     <div class="prog-item">
-      <div class="prog-header"><div class="prog-title">SMS / MMS</div><div class="prog-stats">995.112 / 10.650.000&nbsp;|&nbsp;<span style="color:var(--green)">9.3%</span></div></div>
-      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:9.3%"></div></div>
-      <div class="prog-labels"><span>0</span><span>9.3%</span><span>100%</span></div>
+      <div class="prog-header"><div class="prog-title">SMS / MMS</div><div class="prog-stats">946.686 / 10.650.000&nbsp;|&nbsp;<span style="color:var(--green)">8.9%</span></div></div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:8.9%"></div></div>
+      <div class="prog-labels"><span>0</span><span>8.9%</span><span>100%</span></div>
     </div>
     <div class="prog-item">
-      <div class="prog-header"><div class="prog-title">WhatsApp</div><div class="prog-stats">956.987 / 7.720.000&nbsp;|&nbsp;<span style="color:var(--green)">12.4%</span></div></div>
-      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:12.4%"></div></div>
-      <div class="prog-labels"><span>0</span><span>12.4%</span><span>100%</span></div>
+      <div class="prog-header"><div class="prog-title">WhatsApp</div><div class="prog-stats">924.344 / 7.720.000&nbsp;|&nbsp;<span style="color:var(--green)">12.0%</span></div></div>
+      <div class="prog-bar-bg"><div class="prog-bar-fill fill-green" style="width:12%"></div></div>
+      <div class="prog-labels"><span>0</span><span>12.0%</span><span>100%</span></div>
     </div></div>
   </div>
 
@@ -339,18 +339,18 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
 </section>
 
 <!-- SUPER MESSAGES -->
-<section id="super" class="section">
+<section id="super" class="section active">
   <div class="section-title">Acumulado por Grupo</div>
   <div class="kpi-grid" id="kpiSuperAcum">
-    <div class="kpi"><div class="kpi-label">Redação · Acumulado</div><div class="kpi-value">199.0M</div><div class="kpi-sub">Franquia 24m: 674.040.000 · Part.: 42.5%</div><span class="kpi-badge badge-green">29.5% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Circulação · Acumulado</div><div class="kpi-value">264.0M</div><div class="kpi-sub">Franquia 24m: 714.000.000 · Part.: 56.3%</div><span class="kpi-badge badge-green">37.0% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Marketing · Acumulado</div><div class="kpi-value">5.5M</div><div class="kpi-sub">Franquia 24m: 22.000.000 · Part.: 1.2%</div><span class="kpi-badge badge-green">25.0% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Total Acumulado SM</div><div class="kpi-value">468.5M</div><div class="kpi-sub">Franquia 24m: 1.410.040.000</div><span class="kpi-badge badge-green">33.2% utilizado</span></div></div>
+    <div class="kpi"><div class="kpi-label">Redação · Acumulado</div><div class="kpi-value">171.8M</div><div class="kpi-sub">Franquia 24m: 674.040.000 · Part.: 42.9%</div><span class="kpi-badge badge-green">25.5% utilizado</span></div>
+    <div class="kpi"><div class="kpi-label">Circulação · Acumulado</div><div class="kpi-value">222.7M</div><div class="kpi-sub">Franquia 24m: 714.000.000 · Part.: 55.7%</div><span class="kpi-badge badge-green">31.2% utilizado</span></div>
+    <div class="kpi"><div class="kpi-label">Marketing · Acumulado</div><div class="kpi-value">5.4M</div><div class="kpi-sub">Franquia 24m: 22.000.000 · Part.: 1.4%</div><span class="kpi-badge badge-green">24.7% utilizado</span></div>
+    <div class="kpi"><div class="kpi-label">Total Acumulado SM</div><div class="kpi-value">399.9M</div><div class="kpi-sub">Franquia 24m: 1.410.040.000</div><span class="kpi-badge badge-green">28.4% utilizado</span></div></div>
   <div class="section-title">Média Mensal por Grupo</div>
   <div class="kpi-grid" id="kpiSuperMedia">
-    <div class="kpi"><div class="kpi-label">Média Mensal · Redação</div><div class="kpi-value">27.0M</div><div class="kpi-sub">Franquia mensal: 28.085.000 · Média dos últimos 6 meses</div><span class="kpi-badge badge-amber">Próximo da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · Circulação</div><div class="kpi-value">37.5M</div><div class="kpi-sub">Franquia mensal: 29.750.000 · Média dos últimos 6 meses</div><span class="kpi-badge badge-red">Acima da franquia</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal · Marketing</div><div class="kpi-value">716K</div><div class="kpi-sub">Franquia mensal: 916.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div></div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · Redação</div><div class="kpi-value">27.4M</div><div class="kpi-sub">Franquia mensal: 28.085.000 · Média dos últimos 6 meses</div><span class="kpi-badge badge-amber">Próximo da franquia</span></div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · Circulação</div><div class="kpi-value">35.9M</div><div class="kpi-sub">Franquia mensal: 29.750.000 · Média dos últimos 6 meses</div><span class="kpi-badge badge-red">Acima da franquia</span></div>
+    <div class="kpi"><div class="kpi-label">Média Mensal · Marketing</div><div class="kpi-value">868K</div><div class="kpi-sub">Franquia mensal: 916.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div></div>
   <div class="section-title">Projeção até o Final do Contrato</div>
   <div id="alertaProjecao" style="margin-bottom:16px;"></div>
   <div class="charts-only">
@@ -372,17 +372,17 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
       <div style="background:rgba(239,68,68,0.08);border:1px solid var(--red);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
         <div style="font-size:18px;flex-shrink:0;">⚠️</div>
         <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-          <strong style="color:var(--red)">Total SM:</strong> mantendo a média de <strong style="color:var(--text)">65.3M/mês</strong>, 
+          <strong style="color:var(--red)">Total SM:</strong> mantendo a média de <strong style="color:var(--text)">64.2M/mês</strong>, 
           a franquia de <strong style="color:var(--text)">1,41 Bi</strong> será esgotada em 
           <strong style="color:var(--red)">Jul/27</strong> — 
           <strong style="color:var(--red)">2 meses</strong> antes do fim do contrato.
         </div>
       </div></div>
-        <div class="chart-wrap" style="height:300px;"><canvas id="chartProjecao" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
+        <div class="chart-wrap" style="height:300px;"><canvas id="chartProjecao" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 1415px;" width="1769"></canvas></div>
       </div>
-      <div class="chart-card wide"><div class="chart-title">Consumo Mensal por Grupo</div><div class="chart-sub">Disparos mensais (Redação, Circulação, Marketing) vs franquia mensal</div><div class="chart-wrap"><canvas id="chartSuper" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Participação por Grupo (Acumulado)</div><div class="chart-sub">Distribuição do consumo total</div><div class="chart-wrap"><canvas id="chartSuperPie" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Acumulado vs Franquia 24 meses</div><div class="chart-sub">Evolução do total acumulado de Super Messages</div><div class="chart-wrap"><canvas id="chartSuperAcum" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div></div>
+      <div class="chart-card wide"><div class="chart-title">Consumo Mensal por Grupo</div><div class="chart-sub">Disparos mensais (Redação, Circulação, Marketing) vs franquia mensal</div><div class="chart-wrap"><canvas id="chartSuper" height="300" style="display: block; box-sizing: border-box; height: 240px; width: 1415px;" width="1769"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Participação por Grupo (Acumulado)</div><div class="chart-sub">Distribuição do consumo total</div><div class="chart-wrap"><canvas id="chartSuperPie" height="300" style="display: block; box-sizing: border-box; height: 240px; width: 678px;" width="848"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Acumulado vs Franquia 24 meses</div><div class="chart-sub">Evolução do total acumulado de Super Messages</div><div class="chart-wrap"><canvas id="chartSuperAcum" height="300" style="display: block; box-sizing: border-box; height: 240px; width: 678px;" width="848"></canvas></div></div>
     </div>
   </div>
   <div class="table-only" style="margin-top:18px;">
@@ -435,14 +435,7 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
       <td style="">57.472</td>
       <td style="color:var(--red);">68.586.519 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
       <td>399.909.996</td>
-    </tr><tr>
-      <td>Mar/26</td>
-      <td style="">27.246.495</td>
-      <td style="color:var(--red);">41.282.552 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td style="">57.472</td>
-      <td style="color:var(--red);">68.586.519 <span style="color:var(--red);font-size:10px;font-weight:700;" title="Acima da franquia mensal">▲</span></td>
-      <td>468.496.515</td>
-    </tr><tr class="total-row"><td>ACUMULADO</td><td>199.004.517</td><td>263.991.975</td><td>5.500.023</td><td>468.496.515</td><td class="acc">468.496.515</td></tr></tbody></table></div></div>
+    </tr><tr class="total-row"><td>ACUMULADO</td><td>171.758.022</td><td>222.709.423</td><td>5.442.551</td><td>399.909.996</td><td class="acc">399.909.996</td></tr></tbody></table></div></div>
   </div>
 </section>
 
@@ -450,10 +443,10 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
 <section id="sms" class="section">
   <div class="section-title">SMS / MMS — Call Center</div>
   <div class="kpi-grid" id="kpiSMS">
-    <div class="kpi"><div class="kpi-label">Acumulado</div><div class="kpi-value">995.112</div><div class="kpi-sub">Franquia 24m: 10.650.000</div><span class="kpi-badge badge-green">9.3% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">112.753</div><div class="kpi-sub">Franquia mensal: 443.750 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
+    <div class="kpi"><div class="kpi-label">Acumulado</div><div class="kpi-value">946.686</div><div class="kpi-sub">Franquia 24m: 10.650.000</div><span class="kpi-badge badge-green">8.9% utilizado</span></div>
+    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">138.711</div><div class="kpi-sub">Franquia mensal: 443.750 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
     <div class="kpi"><div class="kpi-label">Valor pago</div><div class="kpi-value">R$ 5,38</div><div class="kpi-sub">Por pacote de 1.000</div></div>
-    <div class="kpi"><div class="kpi-label">Saldo restante</div><div class="kpi-value">9.654.888</div><div class="kpi-sub">Franquia total: 10.650.000</div><span class="kpi-badge badge-green">90.7% disponível</span></div></div>
+    <div class="kpi"><div class="kpi-label">Saldo restante</div><div class="kpi-value">9.703.314</div><div class="kpi-sub">Franquia total: 10.650.000</div><span class="kpi-badge badge-green">91.1% disponível</span></div></div>
 
   <div class="section-title">Projeção até o Final do Contrato</div>
   <div class="charts-only">
@@ -465,9 +458,9 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
         <div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
           <div style="font-size:18px;flex-shrink:0;">✅</div>
           <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-            <strong style="color:var(--green)">SMS/MMS:</strong> mantendo a média de <strong style="color:var(--text)">112.753/mês</strong>, 
+            <strong style="color:var(--green)">SMS/MMS:</strong> mantendo a média de <strong style="color:var(--text)">138.711/mês</strong>, 
             a franquia de <strong style="color:var(--text)">10,7 M</strong> será suficiente até Set/2027 com sobra estimada de 
-            <strong style="color:var(--green)">7.738.093</strong> disparos.
+            <strong style="color:var(--green)">7.206.519</strong> disparos.
           </div>
         </div></div>
         <div class="chart-wrap" style="height:300px;"><canvas id="chartProjecaoSMS" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
@@ -476,7 +469,7 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
     </div>
   </div>
   <div class="table-only" style="margin-top:18px;">
-    <div class="table-wrap"><div class="table-header"><h3>SMS/MMS — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Disparos</th><th>Acumulado</th><th>Franquia Mensal</th><th>% Franquia</th></tr></thead><tbody id="tabelaSMS"><tr><td>Set/25</td><td>114.421</td><td>114.421</td><td>443.750</td><td>25.8%</td></tr><tr><td>Out/25</td><td>204.175</td><td>318.596</td><td>443.750</td><td>46.0%</td></tr><tr><td>Nov/25</td><td>203.187</td><td>521.783</td><td>443.750</td><td>45.8%</td></tr><tr><td>Dez/25</td><td>191.268</td><td>713.051</td><td>443.750</td><td>43.1%</td></tr><tr><td>Jan/26</td><td>137.534</td><td>850.585</td><td>443.750</td><td>31.0%</td></tr><tr><td>Fev/26</td><td>47.675</td><td>898.260</td><td>443.750</td><td>10.7%</td></tr><tr><td>Mar/26</td><td>48.426</td><td>946.686</td><td>443.750</td><td>10.9%</td></tr><tr><td>Mar/26</td><td>48.426</td><td>995.112</td><td>443.750</td><td>10.9%</td></tr><tr class="total-row"><td>ACUMULADO</td><td>995.112</td><td class="acc">995.112</td><td>—</td><td>9.3% do total</td></tr></tbody></table></div></div>
+    <div class="table-wrap"><div class="table-header"><h3>SMS/MMS — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Disparos</th><th>Acumulado</th><th>Franquia Mensal</th><th>% Franquia</th></tr></thead><tbody id="tabelaSMS"><tr><td>Set/25</td><td>114.421</td><td>114.421</td><td>443.750</td><td>25.8%</td></tr><tr><td>Out/25</td><td>204.175</td><td>318.596</td><td>443.750</td><td>46.0%</td></tr><tr><td>Nov/25</td><td>203.187</td><td>521.783</td><td>443.750</td><td>45.8%</td></tr><tr><td>Dez/25</td><td>191.268</td><td>713.051</td><td>443.750</td><td>43.1%</td></tr><tr><td>Jan/26</td><td>137.534</td><td>850.585</td><td>443.750</td><td>31.0%</td></tr><tr><td>Fev/26</td><td>47.675</td><td>898.260</td><td>443.750</td><td>10.7%</td></tr><tr><td>Mar/26</td><td>48.426</td><td>946.686</td><td>443.750</td><td>10.9%</td></tr><tr class="total-row"><td>ACUMULADO</td><td>946.686</td><td class="acc">946.686</td><td>—</td><td>8.9% do total</td></tr></tbody></table></div></div>
   </div>
 </section>
 
@@ -484,10 +477,10 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
 <section id="whatsapp" class="section">
   <div class="section-title">WhatsApp — Marketing</div>
   <div class="kpi-grid" id="kpiWA">
-    <div class="kpi"><div class="kpi-label">Acumulado</div><div class="kpi-value">956.987</div><div class="kpi-sub">Franquia 24m: 7.720.000</div><span class="kpi-badge badge-green">12.4% utilizado</span></div>
-    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">132.167</div><div class="kpi-sub">Franquia mensal: 321.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
+    <div class="kpi"><div class="kpi-label">Acumulado</div><div class="kpi-value">924.344</div><div class="kpi-sub">Franquia 24m: 7.720.000</div><span class="kpi-badge badge-green">12.0% utilizado</span></div>
+    <div class="kpi"><div class="kpi-label">Média Mensal</div><div class="kpi-value">154.006</div><div class="kpi-sub">Franquia mensal: 321.667 · Média dos últimos 6 meses</div><span class="kpi-badge badge-green">Dentro da franquia</span></div>
     <div class="kpi"><div class="kpi-label">Valor pago</div><div class="kpi-value">R$ 5,38</div><div class="kpi-sub">Por pacote de 1.000</div></div>
-    <div class="kpi"><div class="kpi-label">Saldo restante</div><div class="kpi-value">6.763.013</div><div class="kpi-sub">Franquia total: 7.720.000</div><span class="kpi-badge badge-green">87.6% disponível</span></div></div>
+    <div class="kpi"><div class="kpi-label">Saldo restante</div><div class="kpi-value">6.795.656</div><div class="kpi-sub">Franquia total: 7.720.000</div><span class="kpi-badge badge-green">88.0% disponível</span></div></div>
 
   <div class="section-title">Projeção até o Final do Contrato</div>
   <div id="alertaProjecaoWA" style="margin-bottom:16px;"></div>
@@ -504,9 +497,9 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
         <div style="background:rgba(34,197,94,0.08);border:1px solid var(--green);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;">
           <div style="font-size:18px;flex-shrink:0;">✅</div>
           <div style="font-size:12px;color:var(--text2);line-height:1.7;">
-            <strong style="color:var(--green)">WhatsApp:</strong> mantendo a média de <strong style="color:var(--text)">132K/mês</strong>, 
+            <strong style="color:var(--green)">WhatsApp:</strong> mantendo a média de <strong style="color:var(--text)">154K/mês</strong>, 
             a franquia de <strong style="color:var(--text)">7,7 M</strong> será suficiente até Set/2027 com sobra estimada de 
-            <strong style="color:var(--green)">4.5M</strong> disparos.
+            <strong style="color:var(--green)">4.0M</strong> disparos.
           </div>
         </div></div>
         <div class="chart-wrap" style="height:300px;"><canvas id="chartProjecaoWA" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;" width="0"></canvas></div>
@@ -515,12 +508,12 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
     </div>
   </div>
   <div class="table-only" style="margin-top:18px;">
-    <div class="table-wrap"><div class="table-header"><h3>WhatsApp — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Disparos</th><th>Acumulado</th><th>Franquia Mensal</th><th>% Franquia</th></tr></thead><tbody id="tabelaWA"><tr><td>Set/25</td><td>309</td><td>309</td><td>321.667</td><td>0.1%</td></tr><tr><td>Out/25</td><td>163.678</td><td>163.987</td><td>321.667</td><td>50.9%</td></tr><tr><td>Nov/25</td><td>57.955</td><td>221.942</td><td>321.667</td><td>18.0%</td></tr><tr><td>Dez/25</td><td>290.777</td><td>512.719</td><td>321.667</td><td>90.4%</td></tr><tr><td>Jan/26</td><td>135.742</td><td>648.461</td><td>321.667</td><td>42.2%</td></tr><tr><td>Fev/26</td><td>243.240</td><td>891.701</td><td>321.667</td><td>75.6%</td></tr><tr><td>Mar/26</td><td>32.643</td><td>924.344</td><td>321.667</td><td>10.1%</td></tr><tr><td>Mar/26</td><td>32.643</td><td>956.987</td><td>321.667</td><td>10.1%</td></tr><tr class="total-row"><td>ACUMULADO</td><td>956.987</td><td class="acc">956.987</td><td>—</td><td>12.4% do total</td></tr></tbody></table></div></div>
+    <div class="table-wrap"><div class="table-header"><h3>WhatsApp — Detalhe Mensal</h3></div><div style="overflow-x:auto"><table><thead><tr><th>Mês</th><th>Disparos</th><th>Acumulado</th><th>Franquia Mensal</th><th>% Franquia</th></tr></thead><tbody id="tabelaWA"><tr><td>Set/25</td><td>309</td><td>309</td><td>321.667</td><td>0.1%</td></tr><tr><td>Out/25</td><td>163.678</td><td>163.987</td><td>321.667</td><td>50.9%</td></tr><tr><td>Nov/25</td><td>57.955</td><td>221.942</td><td>321.667</td><td>18.0%</td></tr><tr><td>Dez/25</td><td>290.777</td><td>512.719</td><td>321.667</td><td>90.4%</td></tr><tr><td>Jan/26</td><td>135.742</td><td>648.461</td><td>321.667</td><td>42.2%</td></tr><tr><td>Fev/26</td><td>243.240</td><td>891.701</td><td>321.667</td><td>75.6%</td></tr><tr><td>Mar/26</td><td>32.643</td><td>924.344</td><td>321.667</td><td>10.1%</td></tr><tr class="total-row"><td>ACUMULADO</td><td>924.344</td><td class="acc">924.344</td><td>—</td><td>12.0% do total</td></tr></tbody></table></div></div>
   </div>
 </section>
 
 <!-- TABELA COMPLETA -->
-<section id="detalhe" class="section active">
+<section id="detalhe" class="section">
   <div class="section-title">Tabela Mensal Completa — Todos os Canais</div>
   <div class="table-wrap">
     <div class="table-header"><h3>Detalhe de Consumo Mensal</h3></div>
@@ -622,28 +615,17 @@ footer{text-align:center;padding:16px 32px;color:var(--muted);font-size:11px;bor
       <td style="border-right:2px solid #7c3aed;color:#7c3aed;">946.686</td>
       <td>32.643</td>
       <td style="color:var(--green);">924.344</td>
-    </tr><tr>
-      <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">Mar/26</td>
-      <td style="border-left:2px solid var(--accent);">27.246.495</td>
-      <td>41.282.552</td>
-      <td>57.472</td>
-      <td>68.586.519</td>
-      <td style="border-right:2px solid var(--accent);color:var(--accent);">468.496.515</td>
-      <td>48.426</td>
-      <td style="border-right:2px solid #7c3aed;color:#7c3aed;">995.112</td>
-      <td>32.643</td>
-      <td style="color:var(--green);">956.987</td>
     </tr><tr class="total-row">
     <td style="border-right:2px solid var(--border);text-align:left;font-family:'Sora',sans-serif;font-weight:500;">ACUMULADO</td>
-    <td style="border-left:2px solid var(--accent);">199.004.517</td>
-    <td>263.991.975</td>
-    <td>5.500.023</td>
-    <td>468.496.515</td>
-    <td style="border-right:2px solid var(--accent);color:var(--accent);">468.496.515</td>
-    <td>995.112</td>
-    <td style="border-right:2px solid #7c3aed;color:#7c3aed;">995.112</td>
-    <td>956.987</td>
-    <td style="color:var(--green);">956.987</td>
+    <td style="border-left:2px solid var(--accent);">171.758.022</td>
+    <td>222.709.423</td>
+    <td>5.442.551</td>
+    <td>399.909.996</td>
+    <td style="border-right:2px solid var(--accent);color:var(--accent);">399.909.996</td>
+    <td>946.686</td>
+    <td style="border-right:2px solid #7c3aed;color:#7c3aed;">946.686</td>
+    <td>924.344</td>
+    <td style="color:var(--green);">924.344</td>
   </tr></tbody>
       </table>
     </div>
@@ -673,10 +655,14 @@ const FRANQUIA = {
 };
 
 // ===== EXTRA MESES — embutidos no arquivo (não depende de localStorage) =====
-let extras = [{"label":"Mar/26","redacao":27246495,"circulacao":41282552,"marketing":57472,"sms":48426,"wa":32643}];
+let extras = [];
 
 // Sincroniza com localStorage como backup
 if(!extras.length) extras = JSON.parse(localStorage.getItem('sf_extras')||'[]');
+
+// Remove do extras qualquer mês que já está no BASE (evita duplicatas)
+extras = extras.filter(e => !BASE.labels.includes(e.label));
+localStorage.setItem('sf_extras', JSON.stringify(extras));
 
 function persistExtras(){
   localStorage.setItem('sf_extras', JSON.stringify(extras));
@@ -741,7 +727,7 @@ function computeData() {
 
 // ===== FORMAT =====
 const fmtN = n => Math.round(n).toLocaleString('pt-BR');
-const fmt  = n => n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':fmtN(n);
+const fmt  = n => { if(!n && n!==0) return '—'; if(Math.abs(n)>=1e9) return (n/1e9).toFixed(1)+'Bi'; if(Math.abs(n)>=1e6) return (n/1e6).toFixed(1)+'M'; if(Math.abs(n)>=1e3) return Math.round(n/1e3)+'K'; return Math.round(n).toString(); };
 const pct  = (a,b) => (a/b*100).toFixed(1)+'%';
 const badge = (a,b) => {
   if(a>b) return '<span class="kpi-badge badge-red">Acima da franquia</span>';
@@ -900,9 +886,12 @@ function buildProjecao(area) {
   let acumProj = acumAtual;
   allMonths.forEach((m, i) => {
     serieFranquia.push(cfg.franquia);
-    if (i < nReal) {
+    if (i < nReal - 1) {
       serieReal.push(serieRealAcum[i]);
-      serieProj.push(i === nReal - 1 ? serieRealAcum[i] : null);
+      serieProj.push(null);
+    } else if (i === nReal - 1) {
+      serieReal.push(serieRealAcum[i]);
+      serieProj.push(serieRealAcum[i]); // ponto de toque no último real
     } else {
       serieReal.push(null);
       acumProj += mediaMensal;
@@ -966,7 +955,7 @@ function buildProjecao(area) {
       labels: allMonths,
       datasets: [
         {label:`Acumulado Real — ${nomeArea}`,data:serieReal,borderColor:cfg.cor,backgroundColor:cfg.cor+'20',fill:true,tension:0.3,pointRadius:4,pointHoverRadius:6,borderWidth:2,spanGaps:false},
-        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,borderWidth:2,borderDash:[6,3],spanGaps:false},
+        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,pointStyle:'circle',pointBackgroundColor:'transparent',borderWidth:2,borderDash:[6,3],spanGaps:false},
         {label:`Franquia ${nomeArea} (${fmt(cfg.franquia)})`,data:serieFranquia,borderColor:r,borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,backgroundColor:'transparent'}
       ]
     },
@@ -1004,12 +993,16 @@ function buildProjecaoSMS(D) {
 
   const serieReal = [], serieProj = [], serieFranquia = [];
   let acumProj = D.smsAcum.at(-1);
+  const acumAtualSMS = D.smsAcum.at(-1);
 
   allMonths.forEach((m, i) => {
     serieFranquia.push(franquia);
-    if (i < nReal) {
+    if (i < nReal - 1) {
       serieReal.push(D.smsAcum[i]);
-      serieProj.push(i === nReal - 1 ? D.smsAcum[i] : null);
+      serieProj.push(null);
+    } else if (i === nReal - 1) {
+      serieReal.push(D.smsAcum[i]);
+      serieProj.push(D.smsAcum[i]);
     } else {
       serieReal.push(null);
       acumProj += mediaMensal;
@@ -1067,7 +1060,7 @@ function buildProjecaoSMS(D) {
       labels: allMonths,
       datasets: [
         {label:'Acumulado Real — SMS/MMS',data:serieReal,borderColor:a,backgroundColor:a+'20',fill:true,tension:0.3,pointRadius:4,pointHoverRadius:6,borderWidth:2,spanGaps:false},
-        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,borderWidth:2,borderDash:[6,3],spanGaps:false},
+        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,pointStyle:'circle',pointBackgroundColor:'transparent',borderWidth:2,borderDash:[6,3],spanGaps:false},
         {label:`Franquia SMS (${fmtFranquiaSMS(franquia)})`,data:serieFranquia,borderColor:r,borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,backgroundColor:'transparent'}
       ]
     },
@@ -1101,12 +1094,16 @@ function buildProjecaoWA(D) {
   // Acumulado real
   const serieReal = [], serieProj = [], serieFranquia = [];
   let acumProj = D.waAcum.at(-1);
+  const acumAtualWA = D.waAcum.at(-1);
 
   allMonths.forEach((m, i) => {
     serieFranquia.push(franquia);
-    if (i < nReal) {
+    if (i < nReal - 1) {
       serieReal.push(D.waAcum[i]);
-      serieProj.push(i === nReal - 1 ? D.waAcum[i] : null);
+      serieProj.push(null);
+    } else if (i === nReal - 1) {
+      serieReal.push(D.waAcum[i]);
+      serieProj.push(D.waAcum[i]);
     } else {
       serieReal.push(null);
       acumProj += mediaMensal;
@@ -1167,7 +1164,7 @@ function buildProjecaoWA(D) {
       labels: allMonths,
       datasets: [
         {label:'Acumulado Real — WhatsApp',data:serieReal,borderColor:g,backgroundColor:g+'20',fill:true,tension:0.3,pointRadius:4,pointHoverRadius:6,borderWidth:2,spanGaps:false},
-        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,borderWidth:2,borderDash:[6,3],spanGaps:false},
+        {label:'Projeção (média atual)',data:serieProj,borderColor:am,backgroundColor:am+'15',fill:true,tension:0.3,pointRadius:3,pointStyle:'circle',pointBackgroundColor:'transparent',borderWidth:2,borderDash:[6,3],spanGaps:false},
         {label:`Franquia WhatsApp (${fmt(franquia)})`,data:serieFranquia,borderColor:r,borderWidth:1.5,borderDash:[4,3],pointRadius:0,fill:false,backgroundColor:'transparent'}
       ]
     },
